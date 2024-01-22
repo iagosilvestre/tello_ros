@@ -5,6 +5,8 @@ Tello ROS-Gazebo Framework, using Jason BDI Agents to control the drone.
 <pre>
 - /detectRed	std_msgs/Int16		- Amount of red pixels the drone camera is seeing
 - /detectBlue	std_msgs/Int16		- Amount of blue pixels the drone camera is seeing
+- /battery	std_msgs/Int16		- Battery percentage of the drone
+- /cmd_tello	std_msgs/String	- Topic used to send commands to the tello, for example "move_forward;180"
 </pre>
 ## Installation
 
