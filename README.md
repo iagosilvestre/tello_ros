@@ -40,5 +40,4 @@ git clone https://github.com/iagosilvestre/tello_ros.git
 git clone https://github.com/ptrmu/ros2_shared.git
 cd ..
 source /opt/ros/foxy/setup.bash
-# If you didn't intall Gazebo, skip tello_gazebo while building:
 colcon build --event-handlers console_direct+
