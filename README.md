@@ -1,6 +1,10 @@
 # tello_ros
 Tello ROS-Gazebo Framework, using Jason BDI Agents to control the drone.
 
+## ROS Topics of Interest
+- /detectRed	std_msgs/Int16		- Amount of red pixels the drone camera is seeing
+- /detectBlue	std_msgs/Int16		- Amount of blue pixels the drone camera is seeing
+
 ## Installation
 
 ### 1. Set up your Linux environment
@@ -56,3 +60,5 @@ Navigate to the BDI Agent folder(/EB2A-Tello/Agent-tellopy-gz/..) and initiate t
 ~~~
 ./gradlew
 ~~~
+
+
