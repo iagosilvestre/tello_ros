@@ -1,0 +1,10 @@
+/home/oem/tello_ros_ws/src/CB2A-Tello/detectRed/build/CMakeFiles/uninstall.dir
+/home/oem/tello_ros_ws/src/CB2A-Tello/detectRed/build/CMakeFiles/myproject_uninstall.dir
+/home/oem/tello_ros_ws/src/CB2A-Tello/detectRed/build/CMakeFiles/detect_redPixel_image.dir
+/home/oem/tello_ros_ws/src/CB2A-Tello/detectRed/build/CMakeFiles/test.dir
+/home/oem/tello_ros_ws/src/CB2A-Tello/detectRed/build/CMakeFiles/edit_cache.dir
+/home/oem/tello_ros_ws/src/CB2A-Tello/detectRed/build/CMakeFiles/rebuild_cache.dir
+/home/oem/tello_ros_ws/src/CB2A-Tello/detectRed/build/CMakeFiles/list_install_components.dir
+/home/oem/tello_ros_ws/src/CB2A-Tello/detectRed/build/CMakeFiles/install.dir
+/home/oem/tello_ros_ws/src/CB2A-Tello/detectRed/build/CMakeFiles/install/local.dir
+/home/oem/tello_ros_ws/src/CB2A-Tello/detectRed/build/CMakeFiles/install/strip.dir

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2024-01-17T12:16:48.359664322Z</date>
+  <millis>1705493808359</millis>
+  <nanos>664322</nanos>
+  <sequence>0</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>Started!</message>
+</record>
+<record>
+  <date>2024-01-17T12:16:48.363124498Z</date>
+  <millis>1705493808363</millis>
+  <nanos>124498</nanos>
+  <sequence>1</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>taking off</message>
+</record>
+<record>
+  <date>2024-01-17T12:16:58.498672156Z</date>
+  <millis>1705493818498</millis>
+  <nanos>672156</nanos>
+  <sequence>2</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>front</message>
+</record>
+<record>
+  <date>2024-01-17T12:17:06.135386513Z</date>
+  <millis>1705493826135</millis>
+  <nanos>386513</nanos>
+  <sequence>3</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>hover</message>
+</record>
+<record>
+  <date>2024-01-17T12:17:06.240855175Z</date>
+  <millis>1705493826240</millis>
+  <nanos>855175</nanos>
+  <sequence>4</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>reactBlue</message>
+</record>
+<record>
+  <date>2024-01-17T12:17:06.243077862Z</date>
+  <millis>1705493826243</millis>
+  <nanos>77862</nanos>
+  <sequence>5</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>back</message>
+</record>
+<record>
+  <date>2024-01-17T12:17:13.861947918Z</date>
+  <millis>1705493833861</millis>
+  <nanos>947918</nanos>
+  <sequence>6</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>front</message>
+</record>
+<record>
+  <date>2024-01-17T12:17:21.469259625Z</date>
+  <millis>1705493841469</millis>
+  <nanos>259625</nanos>
+  <sequence>7</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>hover</message>
+</record>
+<record>
+  <date>2024-01-17T12:17:21.470542972Z</date>
+  <millis>1705493841470</millis>
+  <nanos>542972</nanos>
+  <sequence>8</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>reactBlue</message>
+</record>
+<record>
+  <date>2024-01-17T12:17:21.472302691Z</date>
+  <millis>1705493841472</millis>
+  <nanos>302691</nanos>
+  <sequence>9</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>back</message>
+</record>
+<record>
+  <date>2024-01-17T12:17:29.160069034Z</date>
+  <millis>1705493849160</millis>
+  <nanos>69034</nanos>
+  <sequence>10</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>front</message>
+</record>
+<record>
+  <date>2024-01-17T12:17:36.836822298Z</date>
+  <millis>1705493856836</millis>
+  <nanos>822298</nanos>
+  <sequence>11</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>hover</message>
+</record>
+<record>
+  <date>2024-01-17T12:17:36.838597775Z</date>
+  <millis>1705493856838</millis>
+  <nanos>597775</nanos>
+  <sequence>12</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>reactRed</message>
+</record>
+<record>
+  <date>2024-01-17T12:17:36.841123055Z</date>
+  <millis>1705493856841</millis>
+  <nanos>123055</nanos>
+  <sequence>13</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>left</message>
+</record>
+<record>
+  <date>2024-01-17T12:17:44.527677620Z</date>
+  <millis>1705493864527</millis>
+  <nanos>677620</nanos>
+  <sequence>14</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>land</message>
+</record>
+</log>

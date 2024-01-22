@@ -1,0 +1,8 @@
+prefix=/home/leandro/critical-embedded-mas/examples/lbbROS1examples/LBB-ROSinterfAnalysis/catkin_ws/devel
+
+Name: my_ros_package
+Description: Description of my_ros_package
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

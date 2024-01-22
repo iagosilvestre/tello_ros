@@ -1,0 +1,96 @@
+import jason.asSyntax.*;
+import jason.environment.*;
+import java.util.logging.*;
+import ros.Publisher;
+import ros.RosBridge;
+import ros.RosListenDelegate;
+import ros.SubscriptionRequestMsg;
+import ros.msgs.geometry_msgs.Twist;
+import ros.msgs.geometry_msgs.Vector3;
+import ros.msgs.std_msgs.PrimitiveMsg;
+import ros.msgs.std_msgs.Int32;
+//import ros.msgs.ariac_msgs.Snapshot;
+//import ros.msgs.ariac_msgs.TimedPose;
+//import ros.msgs.move_base_msgs.MoveBaseActionResult;
+import ros.tools.MessageUnpacker;
+import com.fasterxml.jackson.databind.JsonNode;
+
+public class RosEnv extends Environment {
+
+    private Logger logger = Logger.getLogger("rafael_env."+RosEnv.class.getName());
+    
+    int cont = 0;
+
+    RosBridge bridge = new RosBridge();
+
+    /** Called before the MAS execution with the args informed in .mas2j */
+    @Override
+    public void init(String[] args) {
+        super.init(args);
+        bridge.connect("ws://localhost:9090", true);
+        logger.info("Environment started, connection with ROS established.");
+        
+		//begin Val1
+        bridge.subscribe(SubscriptionRequestMsg.generate("/value1")
+				.setType("std_msgs/Int32")
+				.setThrottleRate(1)
+				.setQueueLength(1),
+			new RosListenDelegate() {
+				public void receive(JsonNode data, String stringRep) {
+					//MessageUnpacker<PrimitiveMsg<Int32>> unpacker = new MessageUnpacker<PrimitiveMsg<Int32>>(PrimitiveMsg.class);
+					MessageUnpacker<Int32> unpacker = new MessageUnpacker<Int32>(Int32.class);
+					//PrimitiveMsg<Int32> msg = unpacker.unpackRosMessage(data);
+					Int32 msg = unpacker.unpackRosMessage(data);
+					logger.info("Val1: " + msg.data);
+                    Literal val = new LiteralImpl("value1"); 
+                    val.addTerm(new NumberTermImpl(msg.data)); 
+                    addPercept("sample_agent_R",val); 
+                }
+            }			
+	    ); //end Val1
+
+		//begin Val2
+        bridge.subscribe(SubscriptionRequestMsg.generate("/value2")
+				.setType("std_msgs/Int32")
+				.setThrottleRate(1)
+				.setQueueLength(1),
+			new RosListenDelegate() {
+				public void receive(JsonNode data, String stringRep) {
+					//MessageUnpacker<PrimitiveMsg<Int32>> unpacker = new MessageUnpacker<PrimitiveMsg<Int32>>(PrimitiveMsg.class);
+					MessageUnpacker<Int32> unpacker = new MessageUnpacker<Int32>(Int32.class);
+					//PrimitiveMsg<Int32> msg = unpacker.unpackRosMessage(data);
+					Int32 msg = unpacker.unpackRosMessage(data);
+					logger.info("Val2: " + msg.data);
+                    Literal val = new LiteralImpl("value2"); 
+                    val.addTerm(new NumberTermImpl(msg.data)); 
+                    addPercept("sample_agent_R",val); 
+                    informAgsEnvironmentChanged();
+                }
+            }			
+	    ); //end Val2
+    } //end init() - where subscriptions are
+
+    @Override
+    public boolean executeAction(String agName, Structure act) {
+        if (act.getFunctor().equals("update_time")) {
+            updateTime();
+        }
+        else {
+            logger.info("PROBLEM: requested: "+act.getFunctor()+", but not implemented!");
+        }
+        informAgsEnvironmentChanged();
+        return true; // the action was executed with success
+    }
+    
+    public void updateTime() {
+        Publisher pub = new Publisher("/current_time", "std_msgs/String", bridge);       
+        pub.publish(new PrimitiveMsg<String>("updateMsg "));
+        logger.info("updateTime requesed"); 
+    }
+
+    /** Called before the end of MAS execution */
+    @Override
+    public void stop() {
+        super.stop();
+    }
+ }

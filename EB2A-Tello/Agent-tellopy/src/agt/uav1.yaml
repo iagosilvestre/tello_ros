@@ -1,0 +1,66 @@
+- device_id: roscore1 #device identifier. It is up to the designer to choose this name.
+  className:  MyRosMaster
+  microcontroller: 
+      id: ros1 #microcontroller identifier. It is up to the designer to choose this name.
+      connectionString: ws://localhost:9090 #connection with ROS      
+      className: DefaultRos4EmbeddedMas  
+  perceptionTopics:
+      - topicName: cp_uav1 #topico do rospy
+        topicType: std_msgs/Int8 #type do rospy
+        beliefName: critical_percept
+      - topicName: land #topico do rospy
+        topicType: std_msgs/Int8 #type do rospy
+        beliefName: goland
+      - topicName: detectRed #topico do rospy
+        topicType: std_msgs/Int16 #type do rospy
+        beliefName: detectred
+      - topicName: detectBlue #topico do rospy
+        topicType: std_msgs/Int16 #type do rospy
+        beliefName: detectblue
+      - topicName: /odom
+        topicType: nav_msgs/Odometry
+      - topicName: /reached_goal
+        topicType: std_msgs/Int8
+        beliefName: reachedGoal
+      - topicName: /agt_x
+        topicType: std_msgs/Float32
+        beliefName: pos_x
+      - topicName: /agt_y
+        topicType: std_msgs/Float32
+        beliefName: pos_y
+      - topicName: /agt_w
+        topicType: std_msgs/Float32
+        beliefName: pos_w
+      - topicName: /agEland
+        topicType: std_msgs/Int8
+        beliefName: eland
+      - topicName: /battery
+        topicType: std_msgs/Int8
+        beliefName: batt
+      #- topicName: landing_x
+      #  topicType: std_msgs/Float64
+      #- topicName: landing_y
+      #  topicType: std_msgs/Float64
+  actions:       
+    serviceRequestActions: #this example has only service-based actions
+        - actionName: land #action name (from agent's perspective)
+          serviceName: /uav1/uav_manager/land #service called to execute the action
+        - actionName: telloAction
+          serviceName: /drone1/tello_action
+          params:
+            - cmd
+    topicWritingActions:          
+      # - actionName: update_value1
+      #   topicName: /value1
+      #   topicType: std_msgs/Int32
+      # - actionName: update_value2              
+      #   topicName: /value2
+      #   topicType: std_msgs/Int32
+       - actionName: cmd              
+         topicName: /cmd_tello
+         topicType: std_msgs/String 
+       - actionName: goto              
+         topicName: /go_to
+         topicType: std_msgs/String
+
+

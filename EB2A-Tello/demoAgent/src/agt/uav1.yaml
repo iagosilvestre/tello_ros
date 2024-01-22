@@ -1,0 +1,41 @@
+- device_id: roscore1 #device identifier. It is up to the designer to choose this name.
+  className:  MyRosMaster
+  microcontroller: 
+      id: ros1 #microcontroller identifier. It is up to the designer to choose this name.
+      connectionString: ws://localhost:9090 #connection with ROS      
+      className: DefaultRos4EmbeddedMas  
+  perceptionTopics:
+      - topicName: cp_uav1 #topico do rospy
+        topicType: std_msgs/Int8 #type do rospy
+        beliefName: critical_percept
+      - topicName: /odom
+        topicType: nav_msgs/Odometry
+      - topicName: /tello_response
+        topicType: tello_msgs/TelloResponse
+      #- topicName: landing_x
+      #  topicType: std_msgs/Float64
+      #- topicName: landing_y
+      #  topicType: std_msgs/Float64
+  actions:       
+    serviceRequestActions: #this example has only service-based actions
+        - actionName: land #action name (from agent's perspective)
+          serviceName: /uav1/uav_manager/land #service called to execute the action
+        - actionName: telloAction
+          serviceName: /tello_action
+          params:
+            - cmd
+    topicWritingActions:          
+      # - actionName: update_value1
+      #   topicName: /value1
+      #   topicType: std_msgs/Int32
+      # - actionName: update_value2              
+      #   topicName: /value2
+      #   topicType: std_msgs/Int32
+       - actionName: teste              
+         topicName: /teste
+         topicType: std_msgs/String 
+       #- actionName: adf              
+       #  topicName: /agent_detected_failure_uav1
+       #  topicType: std_msgs/String 
+
+

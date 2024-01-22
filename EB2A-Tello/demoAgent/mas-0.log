@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-10-19T12:06:47.233458159Z</date>
+  <millis>1697717207233</millis>
+  <nanos>458159</nanos>
+  <sequence>0</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>34</thread>
+  <message>Started!</message>
+</record>
+<record>
+  <date>2023-10-19T12:06:47.239401346Z</date>
+  <millis>1697717207239</millis>
+  <nanos>401346</nanos>
+  <sequence>1</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>34</thread>
+  <message>taking off</message>
+</record>
+<record>
+  <date>2023-10-19T12:06:57.303244510Z</date>
+  <millis>1697717217303</millis>
+  <nanos>244510</nanos>
+  <sequence>2</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>34</thread>
+  <message>left</message>
+</record>
+<record>
+  <date>2023-10-19T12:07:22.316787846Z</date>
+  <millis>1697717242316</millis>
+  <nanos>787846</nanos>
+  <sequence>3</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>34</thread>
+  <message>front</message>
+</record>
+<record>
+  <date>2023-10-19T12:07:47.413767268Z</date>
+  <millis>1697717267413</millis>
+  <nanos>767268</nanos>
+  <sequence>4</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>34</thread>
+  <message>right</message>
+</record>
+<record>
+  <date>2023-10-19T12:08:12.416805785Z</date>
+  <millis>1697717292416</millis>
+  <nanos>805785</nanos>
+  <sequence>5</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>34</thread>
+  <message>back</message>
+</record>
+<record>
+  <date>2023-10-19T12:08:37.422044178Z</date>
+  <millis>1697717317422</millis>
+  <nanos>44178</nanos>
+  <sequence>6</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>34</thread>
+  <message>land</message>
+</record>
+</log>
