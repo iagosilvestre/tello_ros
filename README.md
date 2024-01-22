@@ -41,3 +41,9 @@ git clone https://github.com/ptrmu/ros2_shared.git
 cd ..
 source /opt/ros/foxy/setup.bash
 colcon build --event-handlers console_direct+
+~~~
+
+## Run Simulation
+~~~
+ros2 launch tello_gazebo simple_launch.py 
+~~~
