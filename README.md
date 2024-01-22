@@ -22,8 +22,13 @@ from the source installation instructions.
 
 Install these additional packages:
 ~~~
-sudo apt install ros-foxy-cv-bridge ros-foxy-camera-calibration-parsers
+sudo apt install ros-foxy-cv-bridge ros-foxy-camera-calibration-parsers ros-foxy-gazebo-ros-pkgs
 ~~~
+
+If you run into the **No namespace found** error re-set `GAZEBO_MODEL_PATH`:
+
+    export GAZEBO_MODEL_PATH=${PWD}/install/tello_gazebo/share/tello_gazebo/models
+    source /usr/share/gazebo/setup.sh
 
 ### 3. Install `tello_ros`
 
