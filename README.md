@@ -36,7 +36,7 @@ Download, compile and install `tello_ros`:
 ~~~
 mkdir -p ~/tello_ros_ws/src
 cd ~/tello_ros_ws/src
-git clone https://github.com/clydemcqueen/tello_ros.git
+git clone https://github.com/iagosilvestre/tello_ros.git
 git clone https://github.com/ptrmu/ros2_shared.git
 cd ..
 source /opt/ros/foxy/setup.bash
