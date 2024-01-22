@@ -44,6 +44,15 @@ colcon build --event-handlers console_direct+
 ~~~
 
 ## Run Simulation
+Start the gazebo simulation by running the launch script:
 ~~~
 ros2 launch tello_gazebo simple_launch.py 
+~~~
+Start the python rclpy node :
+~~~
+ros2 run py_pubsub listener-gz
+~~~
+Navigate to the BDI Agent folder(/EB2A-Tello/Agent-tellopy-gz/..) and initiate the agent:
+~~~
+./gradlew
 ~~~
