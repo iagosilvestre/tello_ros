@@ -1,5 +1,5 @@
 # tello_ros
-Tello ROS-Gazebo Framework
+Tello ROS-Gazebo Framework, using Jason BDI Agents to control the drone.
 
 ## Installation
 
