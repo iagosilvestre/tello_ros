@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 import pprint
 import math
 import rclpy
@@ -31,6 +32,7 @@ from rclpy.node import Node
 from std_msgs.msg import Empty, UInt8, UInt8, Bool, String, Int8,Float32,Int16
 from sensor_msgs.msg import Image, Imu, BatteryState, Temperature, CameraInfo
 from geometry_msgs.msg import Twist, TransformStamped, PoseStamped
+from gazebo_msgs.msg import ModelStates
 from nav_msgs.msg import Odometry
 from cv_bridge import CvBridge
 import ament_index_python
@@ -40,6 +42,12 @@ from tf2_ros.transform_listener import TransformListener
 from std_msgs.msg import Float64MultiArray 
 
 class MinimalSubscriber(Node):
+
+    def spin_until_service_complete(node, response):
+        rclpy.spin_until_future_complete(node, response)
+        if response.result() is not None:
+            node.get_logger().info('SERVICE COMPLETE! RESULT:\n{}'.format(response.result()))
+            return response.result()
 
     def __init__(self):
         super().__init__('minimal_subscriber')
@@ -59,9 +67,9 @@ class MinimalSubscriber(Node):
 
         Tello.RESPONSE_TIMEOUT = int(10.0)
         
-        self.tello = Tello()
-        self.tello.connect()
-        self.tello.set_speed(70)
+        #self.tello = Tello()
+        #self.tello.connect()
+        #self.tello.set_speed(70)
         self.pub_conclude = self.create_publisher(String, 'conclude', 10)
         self.pub_image_raw = self.create_publisher(Image, '/drone1/image_raw', 1)
         self.pub_camera_info = self.create_publisher(CameraInfo, '/drone1/camera_info', 1)
@@ -90,7 +98,7 @@ class MinimalSubscriber(Node):
 
         self.thrs=0.03
 
-        self.start_video_capture()
+        #self.start_video_capture()
         self.start_goto_pose()
         #self.sub_cam_vrd = self.create_subscription(Image,'/drone1/image_raw',self.camVerdict_callback,1)
         
@@ -104,7 +112,32 @@ class MinimalSubscriber(Node):
         #tello.move_forward(100)
         #tello.land()
         #self.timer = self.create_timer(0.5, self.on_timer)
+        self.model_name = 'tello_1'
 
+        # Create a subscriber to the /gazebo/model_states topic
+        self.getState = self.create_subscription(
+            ModelStates,
+            '/gazebo/model_states',
+            self.model_states_callback,
+            10  # QoS profile depth
+        )
+        self.getState  # prevent unused variable warning
+
+    def model_states_callback(self, msg):
+        # Find the index of the specified model in the ModelStates message
+        try:
+            model_index = msg.name.index(self.model_name)
+        except ValueError:
+            self.get_logger().warning(f"Model '{self.model_name}' not found in model_states message.")
+            return
+
+        # Get the pose information for the specified model
+        model_pose = msg.pose[model_index]
+
+        # Print the localization information
+        self.get_logger().info(f"Model '{self.model_name}' localization:")
+        self.get_logger().info(f"Position: x={model_pose.position.x}, y={model_pose.position.y}, z={model_pose.position.z}")
+        self.get_logger().info(f"Orientation: x={model_pose.orientation.x}, y={model_pose.orientation.y}, z={model_pose.orientation.z}, w={model_pose.orientation.w}")
 
     def on_timer(self):
         """

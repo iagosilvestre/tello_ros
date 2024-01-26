@@ -108,6 +108,21 @@
             <link_name>base_link${suffix}</link_name>
             <center_of_mass>0 0 0</center_of_mass>
         </plugin>
+        
+        <plugin name="p3d_base_footprint" filename="libgazebo_ros_p3d.so">
+	  <ros>
+	    <namespace>tello</namespace>
+	    <remapping>odom:=tello_odom</remapping>
+	  </ros>
+	  <always_on>true</always_on>
+	  <update_rate>100</update_rate>
+	  <body_name>tello_base_footprint</body_name>
+	  <frame_name>world</frame_name>
+
+	  <gaussian_noise>0.00</gaussian_noise>
+	  <xyz_offset>0 0 0</xyz_offset>
+	  <rpy_offset>0 0 0</rpy_offset>
+	</plugin>
     </gazebo>
 
     <!-- Camera plugin for Gazebo -->
