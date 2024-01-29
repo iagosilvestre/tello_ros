@@ -96,11 +96,14 @@ class MinimalSubscriber(Node):
 
         self.startgoto=0
 
-        self.thrs=0.03
+        self.thrs=0.1
+        self.cameraMsg=Image()
 
-        #self.start_video_capture()
+        self.start_video_capture()
         self.start_goto_pose()
-        #self.sub_cam_vrd = self.create_subscription(Image,'/drone1/image_raw',self.camVerdict_callback,1)
+        self.sub_cam_vrd = self.create_subscription(Image,'/drone1/image_raw',self.camVerdict_callback,1)
+
+        
         
         #self.start_goto_pose()
         #self.start_tello_status()
@@ -133,77 +136,15 @@ class MinimalSubscriber(Node):
 
         # Get the pose information for the specified model
         model_pose = msg.pose[model_index]
-
+        self.current_x=model_pose.position.x
+        self.current_y=model_pose.position.y
+        self.current_w=model_pose.orientation.w
         # Print the localization information
-        self.get_logger().info(f"Model '{self.model_name}' localization:")
-        self.get_logger().info(f"Position: x={model_pose.position.x}, y={model_pose.position.y}, z={model_pose.position.z}")
-        self.get_logger().info(f"Orientation: x={model_pose.orientation.x}, y={model_pose.orientation.y}, z={model_pose.orientation.z}, w={model_pose.orientation.w}")
+        #self.get_logger().info(f"Model '{self.model_name}' localization:")
+        #self.get_logger().info(f"Position: x={model_pose.position.x}, y={model_pose.position.y}, z={model_pose.position.z}")
+        #self.get_logger().info(f"Orientation: x={model_pose.orientation.x}, y={model_pose.orientation.y}, z={model_pose.orientation.z}, w={model_pose.orientation.w}")
 
-    def on_timer(self):
-        """
-        Callback function.
-        This function gets called at the specific time interval.
-        """
-        # Store frame names in variables that will be used to
-        # compute transformations
-        from_frame_rel = self.target_frame
-        to_frame_rel = 'world'
-    
-        trans = None
-        
-        try:
-            now = rclpy.time.Time()
-            trans = self.tf_buffer.lookup_transform(
-                        'world',
-                        'telloCamera',
-                        now)
-        except TransformException as ex:
-            self.get_logger().info(
-                f'Could not transform {to_frame_rel} to {from_frame_rel}: {ex}')
-            return
-        
-        # Publish the 2D pose
-        #drone_x = trans.transform.translation.x
-        #drone_y = trans.transform.translation.y 
-        self.current_x = trans.transform.translation.x
-        self.current_y = trans.transform.translation.y   
-        self.current_w = trans.transform.rotation.w
-        #print("I believe I am at x = %.3f and y=  %.3f "  % (trans.transform.translation.x, trans.transform.translation.y))
-        roll, pitch, yaw = self.euler_from_quaternion(
-        trans.transform.rotation.x,
-        trans.transform.rotation.y,
-        trans.transform.rotation.z,
-        trans.transform.rotation.w)      
-        self.current_yaw = yaw    
-        msg = Float64MultiArray()
-        msg.data = [self.current_x, self.current_y, self.current_yaw]   
-        #self.publisher_2d_pose.publish(msg) 
-   
-    def euler_from_quaternion(self, x, y, z, w):
-        """
-        Convert a quaternion into euler angles (roll, pitch, yaw)
-        roll is rotation around x in radians (counterclockwise)
-        pitch is rotation around y in radians (counterclockwise)
-        yaw is rotation around z in radians (counterclockwise)
-        """
-        t0 = +2.0 * (w * x + y * z)
-        t1 = +1.0 - 2.0 * (x * x + y * y)
-        roll_x = math.atan2(t0, t1)
-        
-        t2 = +2.0 * (w * y - z * x)
-        t2 = +1.0 if t2 > +1.0 else t2
-        t2 = -1.0 if t2 < -1.0 else t2
-        pitch_y = math.asin(t2)
-        
-        t3 = +2.0 * (w * z + x * y)
-        t4 = +1.0 - 2.0 * (y * y + z * z)
-        yaw_z = math.atan2(t3, t4)
-        
-        return roll_x, pitch_y, yaw_z # in radians
-        
-
-
-
+     
     def listener_callback(self, msg):
         baro=1
         x = msg.data.split(";")
@@ -241,30 +182,9 @@ class MinimalSubscriber(Node):
         #drone_y=msg.transforms.transform.translation.y
         #print("I believe I am at x = %.2f and y=  %.2f "  % (drone_x, drone_y))
 
-    def count_red_and_blue_pixels(self,image):
-        # Convert the ROS image message to an OpenCV image
-        bridge = CvBridge()
-        cv_image = bridge.imgmsg_to_cv2(image, desired_encoding="rgb8")
-
-        # Define the lower and upper bounds for the red color in RGB
-        lower_red = numpy.array([100, 0, 0])
-        upper_red = numpy.array([255, 100, 100])
-
-        # Define the lower and upper bounds for the blue color in RGB
-        lower_blue = numpy.array([0, 0, 100])
-        upper_blue = numpy.array([100, 100, 255])
-
-        # Create masks to extract only the red and blue pixels
-        red_mask = cv2.inRange(cv_image, lower_red, upper_red)
-        blue_mask = cv2.inRange(cv_image, lower_blue, upper_blue)
-
-        # Count the number of red and blue pixels
-        red_pixel_count = numpy.sum(red_mask == 255)
-        blue_pixel_count = numpy.sum(blue_mask == 255)
-
-        return red_pixel_count, blue_pixel_count
-
     def camVerdict_callback(self, msg):
+        self.cameraMsg=msg
+    def camVerdict2_callback(self, msg):
         redData=Int8()
         blueData=Int8()
         # Count red and blue pixels in the received image
@@ -311,13 +231,19 @@ class MinimalSubscriber(Node):
         x = msg.data
         x = x.replace("[", "") 
         x = x.replace("]", "") 
-        x = msg.data.split(",")
+        #x = msg.data.split(",")
+        x = msg.data.split(";")
         #self.get_logger().info('x goal: "%s"' % x[0])
         #self.get_logger().info('y goal: "%s"' % x[1])
-        self.goal_x=float(x[0].strip("\"["))
-        self.goal_y=float(x[1].strip("\""))
         #self.goal_w=0.49
-        self.goal_w=float(x[2].strip("\"]"))
+
+        #self.goal_x=float(x[0].strip("\"["))
+        #self.goal_y=float(x[1].strip("\""))
+        #self.goal_w=float(x[2].strip("\"]"))
+
+        self.goal_x=float(x[0].strip("\""))
+        self.goal_y=float(x[1].strip("\""))
+        self.goal_w=float(x[2].strip("\""))
         
         
 
@@ -336,21 +262,21 @@ class MinimalSubscriber(Node):
                 if(abs(self.goal_x-self.current_x)>self.thrs):
                     print("front/back")
                     if(self.goal_x>self.current_x):
-                        msg.linear.x = -0.03
+                        msg.linear.y = 0.03
                     else:
-                        msg.linear.x = 0.03
+                        msg.linear.y = -0.03
                 if(abs(self.goal_y-self.current_y)>self.thrs):
                     print("left/right")
                     if(self.goal_y>self.current_y):
-                        msg.linear.y = -0.03
+                        msg.linear.x = -0.03
                     else:
-                        msg.linear.y = 0.03 
+                        msg.linear.x = 0.03 
                 if(abs(self.goal_w-self.current_w)>0.02):
                     print("rotation")
                     if(self.goal_w>self.current_w):
-                        msg.angular.z = -0.03
+                        msg.angular.z = 0.03
                     else:
-                        msg.angular.z = 0.03   
+                        msg.angular.z = -0.03   
                 if(self.startgoto==1):                
                     self.pub_cmd_vel.publish(msg) #Only for ROS-Gazebo Simulation
                 msg_x.data=self.current_x
@@ -360,9 +286,9 @@ class MinimalSubscriber(Node):
                 self.pub_agt_y.publish(msg_y)
                 self.pub_agt_w.publish(msg_w)
                 #print("Desired velocity x = %.2f and y=  %.2f "  % (msg.linear.x, msg.linear.y))
-                #print("Goal_x = %.2f and Drone_x=  %.2f \n"  % (self.goal_x, self.current_x))
-                #print("Goal_y = %.2f and Drone_y=  %.2f \n"  % (self.goal_y, self.current_y))
-                #print("Goal_w = %.2f and Drone_w=  %.2f \n"  % (self.goal_w, self.current_w))
+                print("Goal_x = %.2f and Drone_x=  %.2f \n"  % (self.goal_x, self.current_x))
+                print("Goal_y = %.2f and Drone_y=  %.2f \n"  % (self.goal_y, self.current_y))
+                print("Goal_w = %.2f and Drone_w=  %.2f \n"  % (self.goal_w, self.current_w))
                 #print("Vel_x = %.2f and Vel_y=  %.2f \n"  % (msg.linear.x , msg.linear.y))
                 time.sleep(rate)
                 
@@ -375,7 +301,7 @@ class MinimalSubscriber(Node):
     # Start video capture thread.
     def start_video_capture(self, rate=1.0/15.0):
         # Enable tello stream
-        self.tello.streamon()
+        #self.tello.streamon()
         #self.tello.set_video_bitrate(1)
         #self.tello.set_video_resolution("Tello.RESOLUTION_480P")
         # OpenCV bridge
@@ -383,26 +309,19 @@ class MinimalSubscriber(Node):
         redData=Int16()
         blueData=Int16()
         def video_capture_thread():
-            frame_read = self.tello.get_frame_read()
-
+            time.sleep(2)
             while True:
-                # Get frame from drone
-                frame = frame_read.frame
+                # Count red and blue pixels in the received image
+                bridge = CvBridge()
+                cv_image = bridge.imgmsg_to_cv2(self.cameraMsg, desired_encoding="rgb8")
 
-                # Publish opencv frame using CV bridge
-                msg = self.bridge.cv2_to_imgmsg(numpy.array(frame), 'rgb8')
-                msg.header.frame_id = 'drone'
-                self.pub_image_raw.publish(msg)
-
-                
-
-                cv_image = self.bridge.imgmsg_to_cv2(msg, desired_encoding="rgb8")
-                lower_red = numpy.array([180, 0, 0])
-                upper_red = numpy.array([255, 150, 150])
+                # Define the lower and upper bounds for the red color in RGB
+                lower_red = numpy.array([200, 50, 50])
+                upper_red = numpy.array([255, 100, 100])
 
                 # Define the lower and upper bounds for the blue color in RGB
-                lower_blue = numpy.array([0, 0, 180])
-                upper_blue = numpy.array([150, 150, 255])
+                lower_blue = numpy.array([50, 50, 200])
+                upper_blue = numpy.array([100, 100, 255])
 
                 # Create masks to extract only the red and blue pixels
                 red_mask = cv2.inRange(cv_image, lower_red, upper_red)
@@ -412,14 +331,12 @@ class MinimalSubscriber(Node):
                 red_pixel_count = numpy.sum(red_mask == 255)
                 blue_pixel_count = numpy.sum(blue_mask == 255)
 
-                if(red_pixel_count>200):
-                    #redData.data=1
-                    redData.data=int(red_pixel_count)
+                if(red_pixel_count>4000):
+                    redData.data=1
                 else:
                     redData.data=0
-                if(blue_pixel_count>200):
-                    #blueData.data=1
-                    blueData.data=int(blue_pixel_count)
+                if(blue_pixel_count>2000):
+                    blueData.data=1
                 else:
                     blueData.data=0   
                 self.pub_det_red.publish(redData)
@@ -428,8 +345,6 @@ class MinimalSubscriber(Node):
                 print(f'The number of blue pixels in the image is: {blue_pixel_count}')
 
                 time.sleep(rate)
-                
-
         # We need to run the recorder in a seperate thread, otherwise blocking options would prevent frames from getting added to the video
         thread = threading.Thread(target=video_capture_thread)
         thread.start()
