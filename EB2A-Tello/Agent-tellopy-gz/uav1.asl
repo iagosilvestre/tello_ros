@@ -9,6 +9,8 @@ land_point(-102.0, -111.0).
 land_radius(10.0).
 diff(200.0).
 thrs(200).
+crit_batt(20).
+low_batt(40).
 my_number(1). 
 my_frame_id("uav1/gps_origin").
 
@@ -69,6 +71,12 @@ my_number_string(S) :- my_number(N)
 //+detectblue(N) : my_number(N) <- !reactBlue(N).
 +detectblue(N) : thrs(CT) & N>=CT  <- !reactBlue(N).
 
+//low battery detection
++batt(B) : low_batt(LB) & crit_batt(CB) & B>=CB & B<=LB <- !safetyLanding.
+
+//critical battery detection
++batt(B) : crit_batt(CB) & B<CB <- !critLanding.
+
 +eland(N) : my_number(N) <- !elanding(N).
 //+failure_uav1(N) : my_number(N) <- !detected_failure(N).
 
@@ -96,7 +104,7 @@ my_number_string(S) :- my_number(N)
       //!hover;
       !takeoff;
       .wait(10000);
-      !flyto(-2.0;0.5;0.70);
+      !flyto(-2.0,0.5,0.70);
       .wait(7500);
       //+hovering;
       //!left;
@@ -116,6 +124,21 @@ my_number_string(S) :- my_number(N)
    <- embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","goto",S);
       .print("Flying to ", X, ",",Y).
 
++!safetyLanding
+   <- .print("Safety Landing Procedure");
+      .suspend(hover);
+      !flyto(-2.0,3.0,0.70);
+      .wait(7500);
+      !land;
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","safetyLanding").
+
++!critLanding
+   <- .print("Critical Landing Procedure");
+      .suspend(hover);
+      !land;
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","criticalLanding").
+
+
 +!reactRed(N)
    :  not reactblue
       & not reactred
@@ -125,7 +148,7 @@ my_number_string(S) :- my_number(N)
       .print("reactRed");
       .suspend(reactBlue(N));
       .suspend(hover);
-      !flyto(0.0;0.5;0.70);
+      !flyto(0.0,0.5,0.70);
       .wait(7500);
       -reactred;
       !land.
@@ -139,9 +162,9 @@ my_number_string(S) :- my_number(N)
       .suspend(reactRed(N));
       .print("reactBlue");
       .suspend(hover);
-      !flyto(-2.0;3.0;0.70);
+      !flyto(-2.0,3.0,0.70);
       .wait(7500);
-      !flyto(-2.0;0.5;0.70);
+      !flyto(-2.0,0.5,0.70);
       .wait(7500);
       -reactblue;
       !hover.
