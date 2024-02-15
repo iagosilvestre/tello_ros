@@ -1,0 +1,40 @@
+[0.072s] Invoking command in '/home/oem/tello_ros_ws/src/tello_ros/EB2A-Tello/Agent-tellopy/build/my_ros_package': /usr/local/bin/cmake /home/oem/tello_ros_ws/src/tello_ros/EB2A-Tello/Agent-tellopy/catkin_ws/src/my_ros_package -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/oem/tello_ros_ws/src/tello_ros/EB2A-Tello/Agent-tellopy/install/my_ros_package
+[0.074s] [0mCMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+[0.074s]   Compatibility with CMake < 3.5 will be removed from a future version of
+[0.074s]   CMake.
+[0.074s] 
+[0.074s]   Update the VERSION argument <min> value or use a ...<max> suffix to tell
+[0.074s]   CMake that the project does not need compatibility with older versions.
+[0.074s] 
+[0.074s] [0m
+[0.121s] -- The C compiler identification is GNU 9.4.0
+[0.167s] -- The CXX compiler identification is GNU 9.4.0
+[0.175s] -- Detecting C compiler ABI info
+[0.242s] -- Detecting C compiler ABI info - done
+[0.256s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.256s] -- Detecting C compile features
+[0.258s] -- Detecting C compile features - done
+[0.271s] -- Detecting CXX compiler ABI info
+[0.310s] -- Detecting CXX compiler ABI info - done
+[0.315s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.315s] -- Detecting CXX compile features
+[0.316s] -- Detecting CXX compile features - done
+[0.328s] [31mCMake Error at CMakeLists.txt:10 (find_package):
+[0.328s]   By not providing "Findcatkin.cmake" in CMAKE_MODULE_PATH this project has
+[0.328s]   asked CMake to find a package configuration file provided by "catkin", but
+[0.328s]   CMake did not find one.
+[0.328s] 
+[0.328s]   Could not find a package configuration file provided by "catkin" with any
+[0.328s]   of the following names:
+[0.328s] 
+[0.328s]     catkinConfig.cmake
+[0.328s]     catkin-config.cmake
+[0.328s] 
+[0.328s]   Add the installation prefix of "catkin" to CMAKE_PREFIX_PATH or set
+[0.328s]   "catkin_DIR" to a directory containing one of the above files.  If "catkin"
+[0.328s]   provides a separate development package or SDK, be sure it has been
+[0.328s]   installed.
+[0.328s] 
+[0.328s] [0m
+[0.328s] -- Configuring incomplete, errors occurred!
+[0.331s] Invoked command in '/home/oem/tello_ros_ws/src/tello_ros/EB2A-Tello/Agent-tellopy/build/my_ros_package' returned '1': /usr/local/bin/cmake /home/oem/tello_ros_ws/src/tello_ros/EB2A-Tello/Agent-tellopy/catkin_ws/src/my_ros_package -DCATKIN_INSTALL_INTO_PREFIX_ROOT=0 -DCMAKE_INSTALL_PREFIX=/home/oem/tello_ros_ws/src/tello_ros/EB2A-Tello/Agent-tellopy/install/my_ros_package

@@ -87,7 +87,23 @@ my_number_string(S) :- my_number(N)
       //!follow_trajectory(0).
       
 !start.
-+!start : firstStation(ST) <- .print("Manager agent started"); !work(ST).
+//+!start : firstStation(ST) <- .print("Manager agent started"); !work(ST).
++!start
+    <- .wait(5000);
+      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[0.0, 0.0, 0.0]);
+      .print("Started!");
+      //!calculate_trajectory;//trajectory//!calculate_area;//!calculate_waypoints(1, []);// pode ser unido com os outros
+      //!hover;
+      !takeoff;
+      .wait(10000);
+      !flyto(-2.0;0.5;0.70);
+      .wait(7500);
+      //+hovering;
+      //!left;
+      //.wait(10000);
+      !hover.
+      //!goto(0.6;0.0;0.48).
+      //!follow_trajectory(0). 
 
       //!follow_trajectory(0).      
 
@@ -95,6 +111,10 @@ my_number_string(S) :- my_number(N)
 //   :  not reachedGoal
 //   <- embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","go_to","" X ";" Y "");
 //      !goto(X,Y).
++!flyto(X, Y, W)
+   :  .term2string([X, Y, W], S)
+   <- embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","goto",S);
+      .print("Flying to ", X, ",",Y).
 
 +!reactRed(N)
    :  not reactblue
@@ -105,7 +125,7 @@ my_number_string(S) :- my_number(N)
       .print("reactRed");
       .suspend(reactBlue(N));
       .suspend(hover);
-      !left;
+      !flyto(0.0;0.5;0.70);
       .wait(7500);
       -reactred;
       !land.
@@ -119,9 +139,9 @@ my_number_string(S) :- my_number(N)
       .suspend(reactRed(N));
       .print("reactBlue");
       .suspend(hover);
-      !back;
+      !flyto(-2.0;3.0;0.70);
       .wait(7500);
-      !front;
+      !flyto(-2.0;0.5;0.70);
       .wait(7500);
       -reactblue;
       !hover.
@@ -131,7 +151,7 @@ my_number_string(S) :- my_number(N)
    <- -+status("hover");
       .print("hover");
       +afterhover;
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","keepalive;0");
+      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","keepalive;0");
       .wait(1000);
       !hover.
 
@@ -200,10 +220,12 @@ my_number_string(S) :- my_number(N)
 +!takeoff
    <- -+status("taking off");
       .print("taking off");
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","takeoff;0");
-      .wait(100);
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","reset"). 
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","telloAction","takeoff").
 
++!land
+   <- -+status("land");
+      .print("land");
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","telloAction","land"). 
 +!down
    <- -+status("down");
       .print("down");
@@ -246,9 +268,7 @@ my_number_string(S) :- my_number(N)
    :  my_number(N)
    <- -+status("front");
       .print("front");
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","move_forward;180");
-      .wait(100);
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","reset").  
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","move_forward;180").
       
 +!back2
    <- -+status("back");
@@ -263,12 +283,7 @@ my_number_string(S) :- my_number(N)
       embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","reset"). 
 
                 
-+!land
-   <- -+status("land");
-      .print("land");
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","land;0");
-      .wait(100);
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","reset").   
+
 
 
 
