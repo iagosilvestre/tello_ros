@@ -17,6 +17,9 @@
       - topicName: detectBlue #topico do rospy
         topicType: std_msgs/Int16 #type do rospy
         beliefName: detectblue
+      - topicName: fireExt #topico do rospy
+        topicType: std_msgs/Int16 #type do rospy
+        beliefName: fireExt
       - topicName: /odom
         topicType: nav_msgs/Odometry
       - topicName: /reached_goal

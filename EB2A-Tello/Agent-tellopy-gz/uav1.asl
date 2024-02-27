@@ -78,6 +78,8 @@ my_number_string(S) :- my_number(N)
 +batt(B) : crit_batt(CB) & B<CB <- !critLanding.
 
 +eland(N) : my_number(N) <- !elanding(N).
+
++fireExt(N) : my_number(N) <- !returnToBase.
 //+failure_uav1(N) : my_number(N) <- !detected_failure(N).
 
 //+failure_uav1(N)<- !detected_failure.
@@ -104,16 +106,14 @@ my_number_string(S) :- my_number(N)
       //!hover;
       !takeoff;
       .wait(10000);
-      !flyto(-2.0,0.5,0.70);
-      .wait(7500);
+      !flyto(0.9,0.0,0.70);
+      .wait(15000);
       //+hovering;
       //!left;
       //.wait(10000);
-      !hover.
-      //!goto(0.6;0.0;0.48).
-      //!follow_trajectory(0). 
-
-      //!follow_trajectory(0).      
+      //!hover.
+      !combatFire.
+     
 
 //+goto(X,Y)
 //   :  not reachedGoal
@@ -138,6 +138,21 @@ my_number_string(S) :- my_number(N)
       !land;
       embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","criticalLanding").
 
++!combatFire
+   <- -+status("combatingFire");
+      .print("Combating Fire");
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","combatFire;0");
+      .wait(2000);
+      !combatFire.
+
++!returnToBase
+   <- +fire_extinguished;
+      .suspend(combatFire);
+      .print("Fire is Extinguished, returning to Base");
+      .suspend(hover);
+      !flyto(-2.0,3.0,0.70);
+      .wait(15000);
+      !land.
 
 +!reactRed(N)
    :  not reactblue
@@ -174,7 +189,7 @@ my_number_string(S) :- my_number(N)
    <- -+status("hover");
       .print("hover");
       +afterhover;
-      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","keepalive;0");
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","keepalive;0");
       .wait(1000);
       !hover.
 

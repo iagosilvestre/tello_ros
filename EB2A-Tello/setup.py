@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-                'listener-gz = py_pubsub.subscriber_member_function_gz:main',
+                'listenergz = py_pubsub.subscriber_member_function_gz:main',
                 'listener = py_pubsub.subscriber_member_function:main',
         ],
     },

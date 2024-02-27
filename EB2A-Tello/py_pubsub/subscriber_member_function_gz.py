@@ -25,6 +25,9 @@ import tf2_msgs.msg
 import cv2
 import time
 import yaml
+import os
+import sys
+from ament_index_python.packages import get_package_share_directory
 
 from djitellopy import Tello
 
@@ -40,7 +43,9 @@ from tf2_ros import TransformException
 from tf2_ros.buffer import Buffer
 from tf2_ros.transform_listener import TransformListener
 from std_msgs.msg import Float64MultiArray 
-from gazebo_msgs.srv import SetEntityState,GetWorldProperties
+from gazebo_msgs.srv import SetEntityState,GetWorldProperties,GetEntityState,DeleteEntity,SpawnEntity
+from geometry_msgs.msg import Vector3
+from gazebo_msgs.msg import ModelState
 
 class MinimalSubscriber(Node):
 
@@ -66,10 +71,11 @@ class MinimalSubscriber(Node):
         self.subscription  # prevent unused variable warning
         # Declare parameters
 
-        self.sub_drone_goto = self.create_subscription(String,'color',self.color_callback,1)
-        self.subscription  # prevent unused variable warning
+        #self.sub_drone_goto = self.create_subscription(String,'color',self.color_callback,1)
+        #self.subscription  # prevent unused variable warning
         # Declare parameters
 
+        
 
 
         Tello.RESPONSE_TIMEOUT = int(10.0)
@@ -87,11 +93,21 @@ class MinimalSubscriber(Node):
         self.pub_cmd_reset = self.create_publisher(String, 'cmd_tello', 1)
         self.pub_det_red = self.create_publisher(Int16, 'detectRed', 1)
         self.pub_det_blue = self.create_publisher(Int16, 'detectBlue', 1)
+        self.pub_det_fire_ext = self.create_publisher(Int16, 'fireExt', 1)
 
         self.pub_cmd_vel = self.create_publisher(Twist, '/drone1/cmd_vel', 1)
-        
+
+        # Publisher to control the model's pose
+        self.publisher = self.create_publisher(
+            ModelState,
+            '/gazebo/set_model_state',
+            10
+        )
+         # Create a service client to delete entities in Gazebo
+        self.delete_entity_client = self.create_client(DeleteEntity, '/delete_entity')
         #self.tf_buffer = Buffer()
         #self.tf_listener = TransformListener(self.tf_buffer, self)
+        self.spawn_entity_client = self.create_client(SpawnEntity, '/spawn_entity')
         
         self.current_x=0.0
         self.current_y=0.0
@@ -108,12 +124,25 @@ class MinimalSubscriber(Node):
         self.thrs=0.1
         self.cameraMsg=Image()
 
+        self.countFire=0
+
         self.start_video_capture()
         self.start_goto_pose()
         self.sub_cam_vrd = self.create_subscription(Image,'/drone1/image_raw',self.camVerdict_callback,1)
 
         
-        
+        #self.resize_object(Vector3(x=1.0, y=1.0, z=2.0))
+
+        #self.delete_object('red_target')
+
+        #self.combatFire()
+        #time.sleep(5)
+        #self.combatFire()
+        #time.sleep(5)
+        #self.combatFire()
+        #self.spawn_object('red_target2')
+
+
         #self.start_goto_pose()
         #self.start_tello_status()
         #self.start_tello_odom()
@@ -135,102 +164,78 @@ class MinimalSubscriber(Node):
         )
         self.getState  # prevent unused variable warning
 
-    def color_callback(self, msg):
-        color = msg.data
-        
-        if color == 'red':
-            # Teleport in a new object
-            object_in_name = 'red_target'
-            new_object_pose = Pose()
-            new_object_pose.position.x = -2.0
-            new_object_pose.position.y = 0.0
-            new_object_pose.position.z = 1.3
-            new_object_pose.orientation.x = 0.5262733023599449
-            new_object_pose.orientation.y = 0.5339706903029998
-            new_object_pose.orientation.z = -0.4805629580935845
-            new_object_pose.orientation.w = 0.454940607583935
-            self.teleport_object(object_in_name, new_object_pose)
-        if color == 'redoff':
-            # Teleport out an existing object
-            object_out_name = 'red_target'
-            object_out_pose = Pose()
-            object_out_pose.position.x = -20.0
-            object_out_pose.position.y = -10.5
-            object_out_pose.position.z = 0.5
-            object_out_pose.orientation.x = 0.0
-            object_out_pose.orientation.y = 0.0
-            object_out_pose.orientation.z = 0.0
-            object_out_pose.orientation.w = 1.0
-            self.teleport_object(object_out_name, object_out_pose)
+    def delete_object(self, object_name):
+        # Ensure the service client is available
+        while not self.delete_entity_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('service not available, waiting again...')
+        request = DeleteEntity.Request()
+        request.name = object_name
+        future = self.delete_entity_client.call_async(request)
+        future.add_done_callback(self.callback)
+    
+    def combatFire(self):
+        # Ensure the service client is available
+        fireExtinguished=Int16()
+        target_fire="red_target_"+str(self.countFire)
+        self.delete_object(target_fire)
+        self.countFire=self.countFire+1
+        if(self.countFire==3):
+            fireExtinguished.data=1
+            self.pub_det_fire_ext.publish(fireExtinguished)
+    
+    def spawn_object(self, object_name):
+        # Ensure the service client is available
+        while not self.spawn_entity_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('service not available, waiting again...')
 
-        if color == 'blue':
-            # Teleport in a new object
-            object_in_name = 'blue_target'
-            new_object_pose = Pose()
-            new_object_pose.position.x = -2.0
-            new_object_pose.position.y = 0.0
-            new_object_pose.position.z = 1.3
-            new_object_pose.orientation.x = 0.5262733023599449
-            new_object_pose.orientation.y = 0.5339706903029998
-            new_object_pose.orientation.z = -0.4805629580935845
-            new_object_pose.orientation.w = 0.454940607583935
-            self.teleport_object(object_in_name, new_object_pose)
-        if color == 'blueoff':
-            # Teleport out an existing object
-            object_out_name = 'blue_target'
-            object_out_pose = Pose()
-            object_out_pose.position.x = -5.0
-            object_out_pose.position.y = -5.5
-            object_out_pose.position.z = 0.5
-            object_out_pose.orientation.x = 0.0
-            object_out_pose.orientation.y = 0.0
-            object_out_pose.orientation.z = 0.0
-            object_out_pose.orientation.w = 1.0
-            self.teleport_object(object_out_name, object_out_pose)
-            
+        sdf_file_path = os.path.join(
+        get_package_share_directory("tello_gazebo"), "models",
+        "red_target", "model.sdf")
 
+        # Set data for request
+        request = SpawnEntity.Request()
+        request.name = object_name
+        request.xml = open(sdf_file_path, 'r').read()
+        #request.robot_namespace = argv[1]
+        #request.initial_pose.position.x = float(argv[2])
+        #request.initial_pose.position.y = float(argv[3])
+        #request.initial_pose.position.z = float(argv[4])
 
-            
-    def teleport_object2(self, object_name, new_pose):
-        set_entity_state_client = self.create_client(SetEntityState, '/gazebo/set_entity_state')
-        while not set_entity_state_client.wait_for_service(timeout_sec=1.0):
-            self.get_logger().info('Service /gazebo/set_entity_state not available, waiting again...')
-        request = SetEntityState.Request()
-        request.state.name = object_name
-        request.state.pose = new_pose
-        request.state.twist = Twist()
-        request.state.reference_frame = 'world'
+        request.initial_pose.position.x = -2.0
+        request.initial_pose.position.y = 0.0
+        request.initial_pose.position.z = 1.3
+        request.initial_pose.orientation.x = 0.5262733023599449
+        request.initial_pose.orientation.y = 0.5339706903029998
+        request.initial_pose.orientation.z = -0.4805629580935845
+        request.initial_pose.orientation.w = 0.454940607583935
 
-        future = set_entity_state_client.call_async(request)
-        rclpy.spin_until_future_complete(self, future)
-        return True
+        #future = self.delete_entity_client.call_async(request)
+        #future.add_done_callback(self.callback)
 
-    def teleport_object(self, object_name, new_pose):
+    def callback(self, future):
         try:
-            set_entity_state_client = self.create_client(SetEntityState, '/gazebo/set_entity_state')
-            while not set_entity_state_client.wait_for_service(timeout_sec=1.0):
-                self.get_logger().info('Service /gazebo/set_entity_state not available, waiting again...')
-            request = SetEntityState.Request()
-            request.state.name = object_name
-            request.state.pose = new_pose
-            request.state.twist = Twist()
-
-            future = set_entity_state_client.call_async(request)
-            rclpy.spin_until_future_complete(self, future)
-
-            if future.result() is not None:
-                if future.result().success:
-                    return True
-                else:
-                    return False
+            response = future.result()
+            if response.success:
+                self.get_logger().info('Object "%s" deleted successfully' % response.status_message)
             else:
-                self.get_logger().error("Service call failed to teleport object: '%s'" % object_name)
-                return False
-
+                self.get_logger().warning('Failed to delete object "%s": %s' % (response.status_message))
         except Exception as e:
-            self.get_logger().error("Exception occurred: %r" % e)
-            return False
+            self.get_logger().error('Service call failed %r' % (e,))
 
+    def resize_object(self, size):
+        print(" Trying to resize object")
+        # Construct message to set model state
+        model_state = ModelState()
+        model_state.model_name = 'red_target'  # Replace with the name of your object
+        model_state.reference_frame = 'world'  # Assuming resizing w.r.t world frame
+
+        # Set the desired size
+        model_state.pose.position.x = size.x
+        model_state.pose.position.y = size.y
+        model_state.pose.position.z = size.z
+
+        # Publish the command to Gazebo
+        self.publisher.publish(model_state)
 
     def model_states_callback(self, msg):
         # Find the index of the specified model in the ModelStates message
@@ -278,7 +283,9 @@ class MinimalSubscriber(Node):
         elif x[0] == "\"rotate_cw":
             self.tello.rotate_clockwise(int(x[1].strip("\"")))
         elif x[0] == "\"keepalive":
-            self.tello.set_speed(70)
+            self.ignCam=0
+        elif x[0] == "\"combatFire":
+            self.combatFire()
           
             #teste=1
             #teste=self.tello.query_speed()
@@ -290,45 +297,7 @@ class MinimalSubscriber(Node):
 
     def camVerdict_callback(self, msg):
         self.cameraMsg=msg
-    def camVerdict2_callback(self, msg):
-        redData=Int8()
-        blueData=Int8()
-        # Count red and blue pixels in the received image
-        bridge = CvBridge()
-        cv_image = bridge.imgmsg_to_cv2(msg, desired_encoding="rgb8")
-
-        # Define the lower and upper bounds for the red color in RGB
-        lower_red = numpy.array([200, 50, 50])
-        upper_red = numpy.array([255, 100, 100])
-
-        # Define the lower and upper bounds for the blue color in RGB
-        lower_blue = numpy.array([50, 50, 200])
-        upper_blue = numpy.array([100, 100, 255])
-
-        # Create masks to extract only the red and blue pixels
-        red_mask = cv2.inRange(cv_image, lower_red, upper_red)
-        blue_mask = cv2.inRange(cv_image, lower_blue, upper_blue)
-
-        # Count the number of red and blue pixels
-        red_pixel_count = numpy.sum(red_mask == 255)
-        blue_pixel_count = numpy.sum(blue_mask == 255)
-
-        if(red_pixel_count>4000):
-            redData.data=1
-        else:
-            redData.data=0
-        if(blue_pixel_count>2000):
-            blueData.data=1
-        else:
-            blueData.data=0   
-        self.pub_det_red.publish(redData)
-        self.pub_det_blue.publish(blueData)
-        print(f'The number of red pixels in the image is: {red_pixel_count}')
-        print(f'The number of blue pixels in the image is: {blue_pixel_count}')
-
-    #def camVerdict_callback(self, msg):
-    #    print("Received Cam img ")
-    #    image = cv2.imread(msg.data)
+    
 
     def goto_callback(self, msg):
         #if(self.startgoto==0):
@@ -339,6 +308,7 @@ class MinimalSubscriber(Node):
         x = x.strip('[]')
         # Split the string by comma and convert values to floats
         vector = [float(x) for x in x.split(',')]
+        self.ignCam=1
 
         
 
@@ -457,21 +427,21 @@ class MinimalSubscriber(Node):
                 red_pixel_count = numpy.sum(red_mask == 255)
                 blue_pixel_count = numpy.sum(blue_mask == 255)
 
-
-                if(red_pixel_count>200):
+                if(self.ignCam==1):
+                    redData.data=0
+                elif(red_pixel_count>200):
                     #redData.data=1
                     redData.data=int(red_pixel_count)
-                else:
-                    redData.data=0
-                if(blue_pixel_count>200):
+                if(self.ignCam==1):
+                    blueData.data=0   
+                elif(blue_pixel_count>200):
                     #blueData.data=1
                     blueData.data=int(blue_pixel_count)
-                else:
-                    blueData.data=0   
+                
                 self.pub_det_red.publish(redData)
                 self.pub_det_blue.publish(blueData)
-                print(f'The number of red pixels in the image is: {red_pixel_count}')
-                print(f'The number of blue pixels in the image is: {blue_pixel_count}')
+                print(f'The number of red pixels in the image is: {redData.data}')
+                print(f'The number of blue pixels in the image is: {blueData.data}')
 
                 time.sleep(rate)
         # We need to run the recorder in a seperate thread, otherwise blocking options would prevent frames from getting added to the video
