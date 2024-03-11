@@ -106,13 +106,12 @@ my_number_string(S) :- my_number(N)
       //!hover;
       !takeoff;
       .wait(10000);
-      !flyto(0.9,0.0,0.70);
-      .wait(15000);
+      !flyto(-2.0,0.5,0.70);
+      .wait(7500);
       //+hovering;
       //!left;
       //.wait(10000);
-      //!hover.
-      !combatFire.
+      !hover.
      
 
 //+goto(X,Y)
@@ -141,8 +140,9 @@ my_number_string(S) :- my_number(N)
 +!combatFire
    <- -+status("combatingFire");
       .print("Combating Fire");
+      .wait(500);
       embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","combatFire;0");
-      .wait(2000);
+      .wait(5000);
       !combatFire.
 
 +!returnToBase

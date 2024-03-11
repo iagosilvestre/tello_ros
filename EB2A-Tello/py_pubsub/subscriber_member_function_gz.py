@@ -71,8 +71,8 @@ class MinimalSubscriber(Node):
         self.subscription  # prevent unused variable warning
         # Declare parameters
 
-        #self.sub_drone_goto = self.create_subscription(String,'color',self.color_callback,1)
-        #self.subscription  # prevent unused variable warning
+        self.sub_drone_goto = self.create_subscription(String,'color',self.color_callback,1)
+        self.subscription  # prevent unused variable warning
         # Declare parameters
 
         
@@ -107,7 +107,20 @@ class MinimalSubscriber(Node):
         self.delete_entity_client = self.create_client(DeleteEntity, '/delete_entity')
         #self.tf_buffer = Buffer()
         #self.tf_listener = TransformListener(self.tf_buffer, self)
+        #self.spawn_entity_client = self.create_client(SpawnEntity, '/spawn_entity')
+
         self.spawn_entity_client = self.create_client(SpawnEntity, '/spawn_entity')
+
+        while not self.spawn_entity_client.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('Waiting for "/spawn_entity" service...')
+        self.get_logger().info('"/spawn_entity" service is available.')
+
+        sdf_file_path = os.path.join(
+        get_package_share_directory("tello_gazebo"), "models",
+        "red_target", "model.sdf")
+
+        print(sdf_file_path)
+        
         
         self.current_x=0.0
         self.current_y=0.0
@@ -118,16 +131,17 @@ class MinimalSubscriber(Node):
         self.goal_w=0.0
 
         self.startgoto=0
+        self.spawn=0
 
-        self.ignCam=1
+        self.ignCam=0
 
         self.thrs=0.1
         self.cameraMsg=Image()
 
         self.countFire=0
 
-        self.start_video_capture()
-        self.start_goto_pose()
+        #self.start_video_capture()
+        #self.start_goto_pose()
         self.sub_cam_vrd = self.create_subscription(Image,'/drone1/image_raw',self.camVerdict_callback,1)
 
         
@@ -140,6 +154,7 @@ class MinimalSubscriber(Node):
         #self.combatFire()
         #time.sleep(5)
         #self.combatFire()
+        #self.delete_object('red_target2')
         #self.spawn_object('red_target2')
 
 
@@ -171,7 +186,7 @@ class MinimalSubscriber(Node):
         request = DeleteEntity.Request()
         request.name = object_name
         future = self.delete_entity_client.call_async(request)
-        future.add_done_callback(self.callback)
+        #future.add_done_callback(self.callback)
     
     def combatFire(self):
         # Ensure the service client is available
@@ -183,14 +198,20 @@ class MinimalSubscriber(Node):
             fireExtinguished.data=1
             self.pub_det_fire_ext.publish(fireExtinguished)
     
+    
     def spawn_object(self, object_name):
         # Ensure the service client is available
         while not self.spawn_entity_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('service not available, waiting again...')
-
-        sdf_file_path = os.path.join(
+        if(object_name=="red_target"):
+            sdf_file_path = os.path.join(
         get_package_share_directory("tello_gazebo"), "models",
         "red_target", "model.sdf")
+        elif(object_name=="blue_target"):
+            sdf_file_path = os.path.join(
+        get_package_share_directory("tello_gazebo"), "models",
+        "blue_target", "model.sdf")
+        
 
         # Set data for request
         request = SpawnEntity.Request()
@@ -209,8 +230,13 @@ class MinimalSubscriber(Node):
         request.initial_pose.orientation.z = -0.4805629580935845
         request.initial_pose.orientation.w = 0.454940607583935
 
-        #future = self.delete_entity_client.call_async(request)
-        #future.add_done_callback(self.callback)
+        future = self.spawn_entity_client.call_async(request)
+        #rclpy.spin_until_future_complete(self, future)
+
+        #if future.result() is not None:
+        #    self.get_logger().info('Object %s inserted successfully' % object_name)
+        #else:
+        #    self.get_logger().warning('Failed to insert object %s' % object_name)
 
     def callback(self, future):
         try:
@@ -236,6 +262,24 @@ class MinimalSubscriber(Node):
 
         # Publish the command to Gazebo
         self.publisher.publish(model_state)
+
+    def color_callback(self, msg):
+        # Find the index of the specified model in the ModelStates message
+        if msg.data=="red":
+            if self.spawn==1:
+                #print("spawn = 1")
+                self.delete_object('blue_target')
+            self.spawn_object('red_target')
+            self.spawn=1
+            #print("spawned red")
+        elif msg.data=="blue":
+            if self.spawn==1:
+                #print("spawn = 1")
+                self.delete_object('red_target')
+            self.spawn_object('blue_target')
+            self.spawn=1
+            #print("spawned blue")
+
 
     def model_states_callback(self, msg):
         # Find the index of the specified model in the ModelStates message
@@ -341,27 +385,27 @@ class MinimalSubscriber(Node):
                 msg.linear.x = 0.0
                 msg.linear.y = 0.0
                 msg.angular.z = 0.0
-                fast=0.03
+                fast=0.05
                 slow=0.01
                 speed=0.0
-                if((abs(self.goal_x-self.current_x)+abs(self.goal_y-self.current_y))>self.thrs*3):
+                if((abs(self.goal_x-self.current_x)+abs(self.goal_y-self.current_y))>self.thrs*9):
                     speed=fast
                 else:
                     speed=slow
                 if(abs(self.goal_x-self.current_x)>self.thrs):
-                    print("front/back")
+                    #print("front/back")
                     if(self.goal_x>self.current_x):
                         msg.linear.y = speed
                     else:
                         msg.linear.y = -speed
                 if(abs(self.goal_y-self.current_y)>self.thrs):
-                    print("left/right")
+                    #print("left/right")
                     if(self.goal_y>self.current_y):
                         msg.linear.x = -speed
                     else:
                         msg.linear.x = speed
                 if(abs(self.goal_w-self.current_w)>0.01):
-                    print("rotation")
+                    #print("rotation")
                     if(self.goal_w>self.current_w):
                         msg.angular.z = 0.01
 
@@ -375,13 +419,11 @@ class MinimalSubscriber(Node):
                 self.pub_agt_x.publish(msg_x)
                 self.pub_agt_y.publish(msg_y)
                 self.pub_agt_w.publish(msg_w)
-                print("Goal_x = %.2f and Drone_x=  %.2f "  % (self.goal_x, self.current_x))
-                print("Goal_y = %.2f and Drone_y=  %.2f "  % (self.goal_y, self.current_y))
-                print("Goal_w = %.2f and Drone_w=  %.2f "  % (self.goal_w, self.current_w))
-                print("Speed = %.2f \n"  % (speed))
-                #print("Goal_x = %.2f"  % (self.goal_x))
-                #print("Goal_y = %.2f "  % (self.goal_y))
-                #print("Goal_w = %.2f \n"  % (self.goal_w))
+                #print("Goal_x = %.2f and Drone_x=  %.2f "  % (self.goal_x, self.current_x))
+                #print("Goal_y = %.2f and Drone_y=  %.2f "  % (self.goal_y, self.current_y))
+                #print("Goal_w = %.2f and Drone_w=  %.2f "  % (self.goal_w, self.current_w))
+                #print("Speed = %.2f \n"  % (speed))
+
                 time.sleep(rate)
                 
 
@@ -408,6 +450,7 @@ class MinimalSubscriber(Node):
                 # Count red and blue pixels in the received image
                 bridge = CvBridge()
                 cv_image = bridge.imgmsg_to_cv2(self.cameraMsg, desired_encoding="rgb8")
+                
 
                 # Define the lower and upper bounds for the red color in RGB
                 #lower_red = numpy.array([200, 50, 50])
