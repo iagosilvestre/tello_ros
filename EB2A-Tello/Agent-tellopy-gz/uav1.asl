@@ -158,7 +158,8 @@ my_number_string(S) :- my_number(N)
    :  not reactblue
       & not reactred
       & afterhover
-   <- +reactred;
+   <- embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agReact","reactRed");
+      +reactred;
       +afterred;
       .print("reactRed");
       .suspend(reactBlue(N));
@@ -263,7 +264,8 @@ my_number_string(S) :- my_number(N)
 +!land
    <- -+status("land");
       .print("land");
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","telloAction","land"). 
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","telloAction","land");
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","Normal Landing").
 +!down
    <- -+status("down");
       .print("down");

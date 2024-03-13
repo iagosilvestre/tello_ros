@@ -35,10 +35,10 @@
         topicType: std_msgs/Float32
         beliefName: pos_w
       - topicName: /agEland
-        topicType: std_msgs/Int8
+        topicType: std_msgs/Int16
         beliefName: eland
       - topicName: /battery
-        topicType: std_msgs/Int8
+        topicType: std_msgs/Int16
         beliefName: batt
       #- topicName: landing_x
       #  topicType: std_msgs/Float64
@@ -67,6 +67,9 @@
          topicType: std_msgs/String
        - actionName: agentLanding              
          topicName: /agLand
+         topicType: std_msgs/String
+       - actionName: agReact              
+         topicName: /agentReact
          topicType: std_msgs/String
 
 

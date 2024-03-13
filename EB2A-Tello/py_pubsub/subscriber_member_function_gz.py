@@ -94,6 +94,7 @@ class MinimalSubscriber(Node):
         self.pub_det_red = self.create_publisher(Int16, 'detectRed', 1)
         self.pub_det_blue = self.create_publisher(Int16, 'detectBlue', 1)
         self.pub_det_fire_ext = self.create_publisher(Int16, 'fireExt', 1)
+        self.pub_batt = self.create_publisher(Int16, 'battery', 1)
 
         self.pub_cmd_vel = self.create_publisher(Twist, '/drone1/cmd_vel', 1)
 
@@ -133,15 +134,15 @@ class MinimalSubscriber(Node):
         self.startgoto=0
         self.spawn=0
 
-        self.ignCam=0
+        self.ignCam=1
 
         self.thrs=0.1
         self.cameraMsg=Image()
 
         self.countFire=0
 
-        #self.start_video_capture()
-        #self.start_goto_pose()
+        self.start_video_capture()
+        self.start_goto_pose()
         self.sub_cam_vrd = self.create_subscription(Image,'/drone1/image_raw',self.camVerdict_callback,1)
 
         
@@ -381,6 +382,7 @@ class MinimalSubscriber(Node):
             msg_x=Float32()
             msg_y=Float32()
             msg_w=Float32()
+            batt=Int16()
             while True:
                 msg.linear.x = 0.0
                 msg.linear.y = 0.0
@@ -416,9 +418,11 @@ class MinimalSubscriber(Node):
                 msg_x.data=self.current_x
                 msg_y.data=self.current_y
                 msg_w.data=self.current_w
+                batt.data=99
                 self.pub_agt_x.publish(msg_x)
                 self.pub_agt_y.publish(msg_y)
                 self.pub_agt_w.publish(msg_w)
+                #self.pub_batt.publish(batt)
                 #print("Goal_x = %.2f and Drone_x=  %.2f "  % (self.goal_x, self.current_x))
                 #print("Goal_y = %.2f and Drone_y=  %.2f "  % (self.goal_y, self.current_y))
                 #print("Goal_w = %.2f and Drone_w=  %.2f "  % (self.goal_w, self.current_w))
