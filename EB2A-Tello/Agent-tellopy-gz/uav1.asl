@@ -105,9 +105,9 @@ my_number_string(S) :- my_number(N)
       //!calculate_trajectory;//trajectory//!calculate_area;//!calculate_waypoints(1, []);// pode ser unido com os outros
       //!hover;
       !takeoff;
-      .wait(10000);
+      .wait(5000);
       !flyto(-2.0,0.5,0.70);
-      .wait(7500);
+      .wait(10000);
       //+hovering;
       //!left;
       //.wait(10000);
@@ -146,24 +146,22 @@ my_number_string(S) :- my_number(N)
       !combatFire.
 
 +!returnToBase
+   :  not reactblue
+      & not reactred
    <- +fire_extinguished;
       .suspend(combatFire);
       .print("Fire is Extinguished, returning to Base");
       .suspend(hover);
       !flyto(-2.0,3.0,0.70);
-      .wait(15000);
+      .wait(8000);
       !land.
 
 +!reactRed(N)
-   :  not reactblue
-      & not reactred
-      & afterhover
+   :  afterhover
    <- embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agReact","reactRed");
+      .suspend(analyzeFire);
       +reactred;
-      +afterred;
       .print("reactRed");
-      .suspend(reactBlue(N));
-      .suspend(hover);
       !flyto(0.0,0.5,0.70);
       .wait(7500);
       -reactred;
@@ -172,27 +170,37 @@ my_number_string(S) :- my_number(N)
 
 +!reactBlue(N)
    :  afterhover
-      & not reactred
-      & not reactblue
    <- +reactblue;
-      .suspend(reactRed(N));
+      .suspend(analyzeFire);
       .print("reactBlue");
-      .suspend(hover);
-      !flyto(-2.0,3.0,0.70);
-      .wait(7500);
+      !flyto(-1.5,0.5,0.70);
+      .wait(3000);
       !flyto(-2.0,0.5,0.70);
-      .wait(7500);
+      .wait(3000);
+      !flyto(-2.5,0.5,0.70);
+      .wait(3000);
+      !flyto(-2.0,0.5,0.70);
+      .wait(3000);
       -reactblue;
-      !hover.
+      !analyzeFire.
+
 +!hover
    :  not reactblue
       & not reactred
    <- -+status("hover");
       .print("hover");
       +afterhover;
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","keepalive;0").
+
++!analyzeFire
+   :  not reactblue
+      & not reactred
+   <- -+status("hover");
+      .print("hover");
+      +afterhover;
       embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","keepalive;0");
-      .wait(1000);
-      !hover.
+      .wait(5000);
+      !returnToBase.
 
 +!work(Location) : location(Location, X, Y, W) 
 	<- .wait(2000);

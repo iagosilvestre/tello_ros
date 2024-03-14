@@ -212,6 +212,10 @@ class MinimalSubscriber(Node):
             sdf_file_path = os.path.join(
         get_package_share_directory("tello_gazebo"), "models",
         "blue_target", "model.sdf")
+        elif(object_name=="white_target"):
+            sdf_file_path = os.path.join(
+        get_package_share_directory("tello_gazebo"), "models",
+        "white_target", "model.sdf")
         
 
         # Set data for request
@@ -278,6 +282,14 @@ class MinimalSubscriber(Node):
                 #print("spawn = 1")
                 self.delete_object('red_target')
             self.spawn_object('blue_target')
+            self.spawn=1
+            #print("spawned blue")
+        elif msg.data=="white":
+            if self.spawn==1:
+                #print("spawn = 1")
+                self.delete_object('blue_target')
+                self.delete_object('red_target')
+            self.spawn_object('white_target')
             self.spawn=1
             #print("spawned blue")
 
@@ -375,7 +387,7 @@ class MinimalSubscriber(Node):
         
 
     # Start goal pose thread.
-    def start_goto_pose(self, rate=1.0/30.0):
+    def start_goto_pose(self, rate=1.0/60.0):
         def goto_pose_thread():
             print("Starting goto thread")
             msg=Twist()
@@ -390,7 +402,7 @@ class MinimalSubscriber(Node):
                 fast=0.05
                 slow=0.01
                 speed=0.0
-                if((abs(self.goal_x-self.current_x)+abs(self.goal_y-self.current_y))>self.thrs*9):
+                if((abs(self.goal_x-self.current_x)+abs(self.goal_y-self.current_y))>self.thrs*5):
                     speed=fast
                 else:
                     speed=slow
