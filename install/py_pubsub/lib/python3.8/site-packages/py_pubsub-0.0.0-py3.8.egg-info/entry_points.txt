@@ -1,0 +1,4 @@
+[console_scripts]
+listener = py_pubsub.subscriber_member_function:main
+listenergz = py_pubsub.subscriber_member_function_gz:main
+

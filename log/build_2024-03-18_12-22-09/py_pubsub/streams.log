@@ -1,0 +1,22 @@
+[0.737s] Invoking command in '/home/oem/tello_ros_ws/src/tello_ros/EB2A-Tello': PYTHONPATH=/home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/prefix_override:/home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/py_pubsub build --build-base /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build install --record /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/install.log --single-version-externally-managed
+[0.853s] running egg_info
+[0.853s] writing ../build/py_pubsub/py_pubsub.egg-info/PKG-INFO
+[0.853s] writing dependency_links to ../build/py_pubsub/py_pubsub.egg-info/dependency_links.txt
+[0.853s] writing entry points to ../build/py_pubsub/py_pubsub.egg-info/entry_points.txt
+[0.853s] writing requirements to ../build/py_pubsub/py_pubsub.egg-info/requires.txt
+[0.853s] writing top-level names to ../build/py_pubsub/py_pubsub.egg-info/top_level.txt
+[0.854s] reading manifest file '../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[0.855s] writing manifest file '../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[0.855s] running build
+[0.855s] running build_py
+[0.855s] running install
+[0.855s] running install_lib
+[0.856s] running install_data
+[0.856s] running install_egg_info
+[0.857s] removing '/home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages/py_pubsub-0.0.0-py3.8.egg-info' (and everything under it)
+[0.857s] Copying ../build/py_pubsub/py_pubsub.egg-info to /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages/py_pubsub-0.0.0-py3.8.egg-info
+[0.857s] running install_scripts
+[0.865s] Installing listener script to /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/py_pubsub
+[0.865s] Installing listenergz script to /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/py_pubsub
+[0.866s] writing list of installed files to '/home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/install.log'
+[0.874s] Invoked command in '/home/oem/tello_ros_ws/src/tello_ros/EB2A-Tello' returned '0': PYTHONPATH=/home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/prefix_override:/home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/py_pubsub build --build-base /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build install --record /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/install.log --single-version-externally-managed

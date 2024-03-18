@@ -89,7 +89,7 @@ my_number_string(S) :- my_number(N)
 !start.
 //+!start : firstStation(ST) <- .print("Manager agent started"); !work(ST).
 +!start
-    <- .wait(5000);
+    <- .wait(10000);
       //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","drop",[0.0, 0.0, 0.0]);
       .print("Started!");
       //!calculate_trajectory;//trajectory//!calculate_area;//!calculate_waypoints(1, []);// pode ser unido com os outros
@@ -117,6 +117,7 @@ my_number_string(S) :- my_number(N)
    <- +reactred;
       +afterred;
       .print("reactRed");
+      .suspend(analyzeFire);
       .suspend(reactBlue(N));
       .suspend(hover);
       !left;
@@ -155,6 +156,7 @@ my_number_string(S) :- my_number(N)
       embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","keepalive;0");
       .wait(5000);
       !back;
+      .wait(7500);
       !land.
 
 +!hover

@@ -1,0 +1,44 @@
+[0.738s] Invoking command in '/home/oem/tello_ros_ws/src/tello_ros/EB2A-Tello': PYTHONPATH=/home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/prefix_override:/home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/py_pubsub build --build-base /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build install --record /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/install.log --single-version-externally-managed
+[0.857s] running egg_info
+[0.857s] creating ../build/py_pubsub/py_pubsub.egg-info
+[0.857s] writing ../build/py_pubsub/py_pubsub.egg-info/PKG-INFO
+[0.857s] writing dependency_links to ../build/py_pubsub/py_pubsub.egg-info/dependency_links.txt
+[0.857s] writing entry points to ../build/py_pubsub/py_pubsub.egg-info/entry_points.txt
+[0.858s] writing requirements to ../build/py_pubsub/py_pubsub.egg-info/requires.txt
+[0.858s] writing top-level names to ../build/py_pubsub/py_pubsub.egg-info/top_level.txt
+[0.858s] writing manifest file '../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[0.859s] reading manifest file '../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[0.859s] writing manifest file '../build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[0.859s] running build
+[0.859s] running build_py
+[0.859s] creating /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build
+[0.859s] creating /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build/lib
+[0.859s] creating /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build/lib/py_pubsub
+[0.859s] copying py_pubsub/subscriber_member_function_gz.py -> /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build/lib/py_pubsub
+[0.859s] copying py_pubsub/publisher_member_function.py -> /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build/lib/py_pubsub
+[0.860s] copying py_pubsub/__init__.py -> /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build/lib/py_pubsub
+[0.860s] copying py_pubsub/subscriber_member_function.py -> /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build/lib/py_pubsub
+[0.860s] running install
+[0.860s] running install_lib
+[0.860s] creating /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages/py_pubsub
+[0.860s] copying /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build/lib/py_pubsub/subscriber_member_function_gz.py -> /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages/py_pubsub
+[0.860s] copying /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build/lib/py_pubsub/publisher_member_function.py -> /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages/py_pubsub
+[0.860s] copying /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build/lib/py_pubsub/__init__.py -> /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages/py_pubsub
+[0.860s] copying /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build/lib/py_pubsub/subscriber_member_function.py -> /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages/py_pubsub
+[0.861s] byte-compiling /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages/py_pubsub/subscriber_member_function_gz.py to subscriber_member_function_gz.cpython-38.pyc
+[0.862s] byte-compiling /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages/py_pubsub/publisher_member_function.py to publisher_member_function.cpython-38.pyc
+[0.862s] byte-compiling /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages/py_pubsub/__init__.py to __init__.cpython-38.pyc
+[0.862s] byte-compiling /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages/py_pubsub/subscriber_member_function.py to subscriber_member_function.cpython-38.pyc
+[0.863s] running install_data
+[0.863s] creating /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/share/ament_index
+[0.863s] creating /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/share/ament_index/resource_index
+[0.863s] creating /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/share/ament_index/resource_index/packages
+[0.863s] copying resource/py_pubsub -> /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/share/ament_index/resource_index/packages
+[0.864s] copying package.xml -> /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/share/py_pubsub
+[0.864s] running install_egg_info
+[0.864s] Copying ../build/py_pubsub/py_pubsub.egg-info to /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages/py_pubsub-0.0.0-py3.8.egg-info
+[0.864s] running install_scripts
+[0.873s] Installing listener script to /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/py_pubsub
+[0.873s] Installing listenergz script to /home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/py_pubsub
+[0.873s] writing list of installed files to '/home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/install.log'
+[0.887s] Invoked command in '/home/oem/tello_ros_ws/src/tello_ros/EB2A-Tello' returned '0': PYTHONPATH=/home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/prefix_override:/home/oem/tello_ros_ws/src/tello_ros/install/py_pubsub/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/py_pubsub build --build-base /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/build install --record /home/oem/tello_ros_ws/src/tello_ros/build/py_pubsub/install.log --single-version-externally-managed
