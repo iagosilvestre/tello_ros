@@ -133,12 +133,30 @@ my_number_string(S) :- my_number(N)
       .suspend(reactRed(N));
       .print("reactBlue");
       .suspend(hover);
-      !back;
-      .wait(7500);
-      !front;
-      .wait(7500);
+      .suspend(analyzeFire);
+      .print("Combating Fire <-");
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","move_left;50");
+      .wait(3000);
+      .print("Combating Fire ->");
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","move_right;100");
+      .wait(6000);
+      .print("Combating Fire <-");
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","move_left;50");
+      .wait(3000);
       -reactblue;
-      !hover.
+      !analyzeFire.
+
++!analyzeFire
+   :  not reactblue
+      & not reactred
+   <- -+status("hover");
+      .print("Analyzing Fire");
+      +afterhover;
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","keepalive;0");
+      .wait(5000);
+      !back;
+      !land.
+
 +!hover
    :  not reactblue
       & not reactred
