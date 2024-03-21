@@ -97,6 +97,7 @@ class MinimalSubscriber(Node):
         self.pub_batt = self.create_publisher(Int16, 'battery', 1)
 
         self.pub_cmd_vel = self.create_publisher(Twist, '/drone1/cmd_vel', 1)
+        self.pub_cmd_vel_dummy = self.create_publisher(Twist, '/cmd_vel', 1)
 
         # Publisher to control the model's pose
         self.publisher = self.create_publisher(
@@ -427,6 +428,7 @@ class MinimalSubscriber(Node):
                         msg.angular.z = -0.01   
                 if(self.startgoto==1):                
                     self.pub_cmd_vel.publish(msg) #Only for ROS-Gazebo Simulation
+                    self.pub_cmd_vel_dummy.publish(msg) #Only for ROS-Gazebo Simulation- dummmy for RosMonitoring check
                 msg_x.data=self.current_x
                 msg_y.data=self.current_y
                 msg_w.data=self.current_w

@@ -103,7 +103,7 @@
     <!-- Tello plugin for Gazebo -->
     <gazebo>
         <plugin name="TelloPlugin" filename="libTelloPlugin.so">
-            <namespace>drone1</namespace>
+            <namespace>dronea</namespace>
             <parameter name="use_sim_time" type="bool">1</parameter>
             <link_name>base_link_1</link_name>
             <center_of_mass>0 0 0</center_of_mass>
