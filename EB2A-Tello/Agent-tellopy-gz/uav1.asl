@@ -77,7 +77,7 @@ my_number_string(S) :- my_number(N)
 //critical battery detection
 +batt(B) : crit_batt(CB) & B<CB <- !critLanding.
 
-+eland(N) : my_number(N) <- !elanding(N).
++eland(N) : my_number(N) <- !critLanding.
 
 +fireExt(N) : my_number(N) <- !returnToBase.
 //+failure_uav1(N) : my_number(N) <- !detected_failure(N).
@@ -158,10 +158,11 @@ my_number_string(S) :- my_number(N)
 
 +!reactRed(N)
    :  afterhover
-   <- embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agReact","reactRed");
+   <- .wait(200);
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agReact","reactRed");
       .suspend(analyzeFire);
       +reactred;
-      .print("reactRed");
+      .print("Took 200ms to reactRed");
       !flyto(0.0,0.5,0.70);
       .wait(7500);
       -reactred;
