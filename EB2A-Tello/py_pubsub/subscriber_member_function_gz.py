@@ -98,6 +98,7 @@ class MinimalSubscriber(Node):
 
         self.pub_cmd_vel = self.create_publisher(Twist, '/drone1/cmd_vel', 1)
         self.pub_cmd_vel_dummy = self.create_publisher(Twist, '/cmd_vel', 1)
+        self.pub_cmd_velX_dummy = self.create_publisher(Int16, '/cmd_velX', 1)
 
         # Publisher to control the model's pose
         self.publisher = self.create_publisher(
@@ -396,39 +397,44 @@ class MinimalSubscriber(Node):
             msg_y=Float32()
             msg_w=Float32()
             batt=Int16()
+            velX=Int16()
             while True:
-                msg.linear.x = 0.0
-                msg.linear.y = 0.0
-                msg.angular.z = 0.0
-                fast=0.05
-                slow=0.01
-                speed=0.0
-                if((abs(self.goal_x-self.current_x)+abs(self.goal_y-self.current_y))>self.thrs*5):
-                    speed=fast
-                else:
-                    speed=slow
-                if(abs(self.goal_x-self.current_x)>self.thrs):
-                    #print("front/back")
-                    if(self.goal_x>self.current_x):
-                        msg.linear.y = speed
+                if(self.startgoto==1):
+                    msg.linear.x = 0.0
+                    msg.linear.y = 0.0
+                    msg.angular.z = 0.0
+                    velX.data=0
+                    fast=0.05
+                    slow=0.01
+                    speed=0.0
+                    if((abs(self.goal_x-self.current_x)+abs(self.goal_y-self.current_y))>self.thrs*5):
+                        speed=fast
                     else:
-                        msg.linear.y = -speed
-                if(abs(self.goal_y-self.current_y)>self.thrs):
-                    #print("left/right")
-                    if(self.goal_y>self.current_y):
-                        msg.linear.x = -speed
-                    else:
-                        msg.linear.x = speed
-                if(abs(self.goal_w-self.current_w)>0.01):
-                    #print("rotation")
-                    if(self.goal_w>self.current_w):
-                        msg.angular.z = 0.01
+                        speed=slow
+                    if(abs(self.goal_x-self.current_x)>self.thrs):
+                        #print("front/back")
+                        if(self.goal_x>self.current_x):
+                            msg.linear.y = speed
+                        else:
+                            msg.linear.y = -speed
+                    if(abs(self.goal_y-self.current_y)>self.thrs):
+                        #print("left/right")
+                        if(self.goal_y>self.current_y):
+                            msg.linear.x = -speed
+                            velX.data=int(-speed*100)
+                        else:
+                            msg.linear.x = speed
+                            velX.data=int(speed*100)
+                    if(abs(self.goal_w-self.current_w)>0.01):
+                        #print("rotation")
+                        if(self.goal_w>self.current_w):
+                            msg.angular.z = 0.01
 
-                    else:
-                        msg.angular.z = -0.01   
-                if(self.startgoto==1):                
+                        else:
+                            msg.angular.z = -0.01   
+                #if(self.startgoto==1):                
                     self.pub_cmd_vel.publish(msg) #Only for ROS-Gazebo Simulation
-                    self.pub_cmd_vel_dummy.publish(msg) #Only for ROS-Gazebo Simulation- dummmy for RosMonitoring check
+                     #Only for ROS-Gazebo Simulation- dummmy for RosMonitoring check
                 msg_x.data=self.current_x
                 msg_y.data=self.current_y
                 msg_w.data=self.current_w
@@ -436,6 +442,9 @@ class MinimalSubscriber(Node):
                 self.pub_agt_x.publish(msg_x)
                 self.pub_agt_y.publish(msg_y)
                 self.pub_agt_w.publish(msg_w)
+
+                self.pub_cmd_vel_dummy.publish(msg)
+                self.pub_cmd_velX_dummy.publish(velX)
                 #self.pub_batt.publish(batt)
                 #print("Goal_x = %.2f and Drone_x=  %.2f "  % (self.goal_x, self.current_x))
                 #print("Goal_y = %.2f and Drone_y=  %.2f "  % (self.goal_y, self.current_y))
