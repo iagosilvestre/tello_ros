@@ -77,8 +77,8 @@ my_number_string(S) :- my_number(N)
 //critical battery detection
 +batt(B) : crit_batt(CB) & B<CB <- !critLanding.
 
-+eland(N) : my_number(N) <- !critLanding.
-//+eland(N) : my_number(N) <- !safetyLanding.
+//+eland(N) : my_number(N) <- !critLanding.
++eland(N) : my_number(N) <- !safetyLanding.
 
 +fireExt(N) : my_number(N) <- !returnToBase.
 //+failure_uav1(N) : my_number(N) <- !detected_failure(N).
@@ -138,8 +138,8 @@ my_number_string(S) :- my_number(N)
    <- .print("Critical Landing Procedure");
       .suspend(hover);
       .suspend(safetyLanding);
-      !land.
-      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","criticalLanding").
+      !land;
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","criticalLanding").
       
 
 +!combatFire

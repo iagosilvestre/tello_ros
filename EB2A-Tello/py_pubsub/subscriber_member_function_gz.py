@@ -445,7 +445,7 @@ class MinimalSubscriber(Node):
 
                 self.pub_cmd_vel_dummy.publish(msg)
                 self.pub_cmd_velX_dummy.publish(velX)
-                #self.pub_batt.publish(batt)
+                self.pub_batt.publish(batt)
                 #print("Goal_x = %.2f and Drone_x=  %.2f "  % (self.goal_x, self.current_x))
                 #print("Goal_y = %.2f and Drone_y=  %.2f "  % (self.goal_y, self.current_y))
                 #print("Goal_w = %.2f and Drone_w=  %.2f "  % (self.goal_w, self.current_w))
