@@ -1,0 +1,88 @@
+{"data": 35, "topic": "battery", "time": 1712521000.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521001.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521002.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521003.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521004.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521005.0, "verdict": "currently_true"}
+{"data": "\"criticalLanding\"", "topic": "agLand", "time": 1712521005.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521006.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521007.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521008.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521009.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521010.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521011.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521012.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521013.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521014.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521015.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521016.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521017.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521018.0, "verdict": "currently_true"}
+{"data": 35, "topic": "battery", "time": 1712521019.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521020.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521021.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521022.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521023.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521024.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521025.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521026.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521027.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521028.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521029.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521030.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521031.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521032.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521033.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521034.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521035.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521036.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521037.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521038.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521039.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521040.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521041.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521042.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521043.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521044.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521045.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521046.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521047.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521048.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521049.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521050.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521051.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521052.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521053.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521054.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521055.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521056.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521057.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521058.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521059.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521060.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521061.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521062.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521063.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521064.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521065.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521066.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521067.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521068.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521069.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521070.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521071.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521072.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521073.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521074.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521075.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521076.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521077.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521078.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521079.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521080.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521081.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521082.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521083.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521084.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521085.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}
+{"data": 35, "topic": "battery", "time": 1712521086.0, "verdict": "currently_false", "spec": "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"}

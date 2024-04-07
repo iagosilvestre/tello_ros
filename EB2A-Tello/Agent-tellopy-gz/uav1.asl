@@ -78,6 +78,7 @@ my_number_string(S) :- my_number(N)
 +batt(B) : crit_batt(CB) & B<CB <- !critLanding.
 
 +eland(N) : my_number(N) <- !critLanding.
+//+eland(N) : my_number(N) <- !safetyLanding.
 
 +fireExt(N) : my_number(N) <- !returnToBase.
 //+failure_uav1(N) : my_number(N) <- !detected_failure(N).
@@ -111,7 +112,8 @@ my_number_string(S) :- my_number(N)
       //+hovering;
       //!left;
       //.wait(10000);
-      !hover.
+      
+      !analyzeFire.
      
 
 //+goto(X,Y)
@@ -126,6 +128,7 @@ my_number_string(S) :- my_number(N)
 +!safetyLanding
    <- .print("Safety Landing Procedure");
       .suspend(hover);
+      .suspend(critLanding);
       !flyto(-2.0,3.0,0.70);
       .wait(7500);
       !land;
@@ -134,8 +137,10 @@ my_number_string(S) :- my_number(N)
 +!critLanding
    <- .print("Critical Landing Procedure");
       .suspend(hover);
-      !land;
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","criticalLanding").
+      .suspend(safetyLanding);
+      !land.
+      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","criticalLanding").
+      
 
 +!combatFire
    <- -+status("combatingFire");
@@ -154,7 +159,8 @@ my_number_string(S) :- my_number(N)
       .suspend(hover);
       !flyto(-2.0,3.0,0.70);
       .wait(8000);
-      !land.
+      !land;
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","Normal Landing").
 
 +!reactRed(N)
    :  afterhover
@@ -166,7 +172,8 @@ my_number_string(S) :- my_number(N)
       !flyto(0.0,0.5,0.70);
       .wait(7500);
       -reactred;
-      !land.
+      !land;
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","Normal Landing").
 
 
 +!reactBlue(N)
@@ -273,8 +280,8 @@ my_number_string(S) :- my_number(N)
 +!land
    <- -+status("land");
       .print("land");
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","telloAction","land");
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","Normal Landing").
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","telloAction","land").
+      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","Normal Landing").
 +!down
    <- -+status("down");
       .print("down");

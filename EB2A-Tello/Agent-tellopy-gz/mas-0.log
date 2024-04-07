@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2024-03-27T02:54:37.954829894Z</date>
-  <millis>1711508077954</millis>
-  <nanos>829894</nanos>
+  <date>2024-04-07T21:47:35.730914028Z</date>
+  <millis>1712526455730</millis>
+  <nanos>914028</nanos>
   <sequence>0</sequence>
   <logger>jason.asSemantics.TransitionSystem.uav1</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>Started!</message>
 </record>
 <record>
-  <date>2024-03-27T02:54:37.959987864Z</date>
-  <millis>1711508077959</millis>
-  <nanos>987864</nanos>
+  <date>2024-04-07T21:47:35.736227610Z</date>
+  <millis>1712526455736</millis>
+  <nanos>227610</nanos>
   <sequence>1</sequence>
   <logger>jason.asSemantics.TransitionSystem.uav1</logger>
   <level>INFO</level>
@@ -26,9 +26,9 @@
   <message>taking off</message>
 </record>
 <record>
-  <date>2024-03-27T02:54:43.029666495Z</date>
-  <millis>1711508083029</millis>
-  <nanos>666495</nanos>
+  <date>2024-04-07T21:47:40.786660933Z</date>
+  <millis>1712526460786</millis>
+  <nanos>660933</nanos>
   <sequence>2</sequence>
   <logger>jason.asSemantics.TransitionSystem.uav1</logger>
   <level>INFO</level>
@@ -38,9 +38,9 @@
   <message>Flying to -2,0.5</message>
 </record>
 <record>
-  <date>2024-03-27T02:54:53.124509925Z</date>
-  <millis>1711508093124</millis>
-  <nanos>509925</nanos>
+  <date>2024-04-07T21:47:50.868418218Z</date>
+  <millis>1712526470868</millis>
+  <nanos>418218</nanos>
   <sequence>3</sequence>
   <logger>jason.asSemantics.TransitionSystem.uav1</logger>
   <level>INFO</level>
@@ -50,82 +50,10 @@
   <message>hover</message>
 </record>
 <record>
-  <date>2024-03-27T02:54:53.229597300Z</date>
-  <millis>1711508093229</millis>
-  <nanos>597300</nanos>
+  <date>2024-04-07T21:47:55.900764807Z</date>
+  <millis>1712526475900</millis>
+  <nanos>764807</nanos>
   <sequence>4</sequence>
-  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
-  <level>INFO</level>
-  <class>jason.stdlib.println</class>
-  <method>execute</method>
-  <thread>56</thread>
-  <message>reactBlue</message>
-</record>
-<record>
-  <date>2024-03-27T02:54:53.231188753Z</date>
-  <millis>1711508093231</millis>
-  <nanos>188753</nanos>
-  <sequence>5</sequence>
-  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
-  <level>INFO</level>
-  <class>jason.stdlib.println</class>
-  <method>execute</method>
-  <thread>56</thread>
-  <message>Flying to -1.5,0.5</message>
-</record>
-<record>
-  <date>2024-03-27T02:54:56.255689011Z</date>
-  <millis>1711508096255</millis>
-  <nanos>689011</nanos>
-  <sequence>6</sequence>
-  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
-  <level>INFO</level>
-  <class>jason.stdlib.println</class>
-  <method>execute</method>
-  <thread>56</thread>
-  <message>Flying to -2,0.5</message>
-</record>
-<record>
-  <date>2024-03-27T02:54:59.278397015Z</date>
-  <millis>1711508099278</millis>
-  <nanos>397015</nanos>
-  <sequence>7</sequence>
-  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
-  <level>INFO</level>
-  <class>jason.stdlib.println</class>
-  <method>execute</method>
-  <thread>56</thread>
-  <message>Flying to -2.5,0.5</message>
-</record>
-<record>
-  <date>2024-03-27T02:55:02.311497463Z</date>
-  <millis>1711508102311</millis>
-  <nanos>497463</nanos>
-  <sequence>8</sequence>
-  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
-  <level>INFO</level>
-  <class>jason.stdlib.println</class>
-  <method>execute</method>
-  <thread>56</thread>
-  <message>Flying to -2,0.5</message>
-</record>
-<record>
-  <date>2024-03-27T02:55:05.333605390Z</date>
-  <millis>1711508105333</millis>
-  <nanos>605390</nanos>
-  <sequence>9</sequence>
-  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
-  <level>INFO</level>
-  <class>jason.stdlib.println</class>
-  <method>execute</method>
-  <thread>56</thread>
-  <message>hover</message>
-</record>
-<record>
-  <date>2024-03-27T02:55:10.376577106Z</date>
-  <millis>1711508110376</millis>
-  <nanos>577106</nanos>
-  <sequence>10</sequence>
   <logger>jason.asSemantics.TransitionSystem.uav1</logger>
   <level>INFO</level>
   <class>jason.stdlib.println</class>
@@ -134,10 +62,10 @@
   <message>Fire is Extinguished, returning to Base</message>
 </record>
 <record>
-  <date>2024-03-27T02:55:10.378596815Z</date>
-  <millis>1711508110378</millis>
-  <nanos>596815</nanos>
-  <sequence>11</sequence>
+  <date>2024-04-07T21:47:55.902555226Z</date>
+  <millis>1712526475902</millis>
+  <nanos>555226</nanos>
+  <sequence>5</sequence>
   <logger>jason.asSemantics.TransitionSystem.uav1</logger>
   <level>INFO</level>
   <class>jason.stdlib.println</class>
@@ -146,10 +74,10 @@
   <message>Flying to -2,3</message>
 </record>
 <record>
-  <date>2024-03-27T02:55:18.440247657Z</date>
-  <millis>1711508118440</millis>
-  <nanos>247657</nanos>
-  <sequence>12</sequence>
+  <date>2024-04-07T21:48:03.964324022Z</date>
+  <millis>1712526483964</millis>
+  <nanos>324022</nanos>
+  <sequence>6</sequence>
   <logger>jason.asSemantics.TransitionSystem.uav1</logger>
   <level>INFO</level>
   <class>jason.stdlib.println</class>
