@@ -355,6 +355,8 @@ class MinimalSubscriber(Node):
             self.tello.rotate_clockwise(int(x[1].strip("\"")))
         elif x[0] == "\"keepalive":
             self.ignCam=0
+        elif x[0] == "\"ign":
+            self.ignCam=1
         elif x[0] == "\"combatFire":
             self.combatFire()
           

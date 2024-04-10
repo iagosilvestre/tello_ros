@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2024-04-10T19:20:00.863806291Z</date>
-  <millis>1712776800863</millis>
-  <nanos>806291</nanos>
+  <date>2024-04-10T19:43:47.937902442Z</date>
+  <millis>1712778227937</millis>
+  <nanos>902442</nanos>
   <sequence>0</sequence>
   <logger>jason.asSemantics.TransitionSystem.uav1</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>Started!</message>
 </record>
 <record>
-  <date>2024-04-10T19:20:00.866527301Z</date>
-  <millis>1712776800866</millis>
-  <nanos>527301</nanos>
+  <date>2024-04-10T19:43:47.942140752Z</date>
+  <millis>1712778227942</millis>
+  <nanos>140752</nanos>
   <sequence>1</sequence>
   <logger>jason.asSemantics.TransitionSystem.uav1</logger>
   <level>INFO</level>
@@ -26,9 +26,9 @@
   <message>taking off</message>
 </record>
 <record>
-  <date>2024-04-10T19:20:05.918418008Z</date>
-  <millis>1712776805918</millis>
-  <nanos>418008</nanos>
+  <date>2024-04-10T19:43:52.997351611Z</date>
+  <millis>1712778232997</millis>
+  <nanos>351611</nanos>
   <sequence>2</sequence>
   <logger>jason.asSemantics.TransitionSystem.uav1</logger>
   <level>INFO</level>
@@ -38,9 +38,9 @@
   <message>Flying to 1,0</message>
 </record>
 <record>
-  <date>2024-04-10T19:20:15.999927426Z</date>
-  <millis>1712776815999</millis>
-  <nanos>927426</nanos>
+  <date>2024-04-10T19:44:03.079218640Z</date>
+  <millis>1712778243079</millis>
+  <nanos>218640</nanos>
   <sequence>3</sequence>
   <logger>jason.asSemantics.TransitionSystem.uav1</logger>
   <level>INFO</level>
@@ -50,22 +50,34 @@
   <message>hover</message>
 </record>
 <record>
-  <date>2024-04-10T19:20:32.045674964Z</date>
-  <millis>1712776832045</millis>
-  <nanos>674964</nanos>
+  <date>2024-04-10T19:44:08.235155036Z</date>
+  <millis>1712778248235</millis>
+  <nanos>155036</nanos>
   <sequence>4</sequence>
   <logger>jason.asSemantics.TransitionSystem.uav1</logger>
   <level>INFO</level>
   <class>jason.stdlib.println</class>
   <method>execute</method>
   <thread>56</thread>
-  <message>Critical Landing Procedure</message>
+  <message>Took 1s to reactRed</message>
 </record>
 <record>
-  <date>2024-04-10T19:20:32.046335922Z</date>
-  <millis>1712776832046</millis>
-  <nanos>335922</nanos>
+  <date>2024-04-10T19:44:08.236556299Z</date>
+  <millis>1712778248236</millis>
+  <nanos>556299</nanos>
   <sequence>5</sequence>
+  <logger>jason.asSemantics.TransitionSystem.uav1</logger>
+  <level>INFO</level>
+  <class>jason.stdlib.println</class>
+  <method>execute</method>
+  <thread>56</thread>
+  <message>Flying to 1,2.5</message>
+</record>
+<record>
+  <date>2024-04-10T19:44:15.808382556Z</date>
+  <millis>1712778255808</millis>
+  <nanos>382556</nanos>
+  <sequence>6</sequence>
   <logger>jason.asSemantics.TransitionSystem.uav1</logger>
   <level>INFO</level>
   <class>jason.stdlib.println</class>

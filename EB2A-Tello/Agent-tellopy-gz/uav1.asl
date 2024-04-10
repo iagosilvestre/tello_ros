@@ -169,7 +169,8 @@ my_number_string(S) :- my_number(N)
       & not reactred
    <- +reactred;
       .suspend(analyzeFire);
-      .wait(1000);
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","ign;0");
+      .wait(5000);
       embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agReact","reactRed");
       .print("Took 1s to reactRed");
       !flyto(1.0,2.5,1.00);
