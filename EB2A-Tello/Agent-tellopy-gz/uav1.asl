@@ -66,7 +66,7 @@ my_number_string(S) :- my_number(N)
 +goland(N) : my_number(N) <- !start_land(N).
 
 //+detectred(N) : my_number(N) <- !reactRed(N).
-+detectred(N) : thrs(CT) & N>=CT  <- !reactRed(N).
++detectred(N) : thrs(CT) & N>=CT  <- !reactRed.
 
 //+detectblue(N) : my_number(N) <- !reactBlue(N).
 +detectblue(N) : thrs(CT) & N>=CT  <- !reactBlue(N).
@@ -77,8 +77,9 @@ my_number_string(S) :- my_number(N)
 //critical battery detection
 +batt(B) : crit_batt(CB) & B<CB <- !critLanding.
 
-//+eland(N) : my_number(N) <- !critLanding.
-+eland(N) : my_number(N) <- !safetyLanding.
++eland(N) : my_number(N) <- !critLanding.
+//+eland(N) : my_number(N) <- !safetyLanding.
+//+eland(N) : my_number(N) <- !reactRed.
 
 +fireExt(N) : my_number(N) <- !returnToBase.
 //+failure_uav1(N) : my_number(N) <- !detected_failure(N).
@@ -107,13 +108,14 @@ my_number_string(S) :- my_number(N)
       //!hover;
       !takeoff;
       .wait(5000);
-      !flyto(-2.0,0.5,0.70);
+      !flyto(1.0,0.0,1.0);
       .wait(10000);
       //+hovering;
       //!left;
       //.wait(10000);
       
-      !analyzeFire.
+      !hover.
+      //!analyzeFire.
      
 
 //+goto(X,Y)
@@ -129,7 +131,7 @@ my_number_string(S) :- my_number(N)
    <- .print("Safety Landing Procedure");
       .suspend(hover);
       .suspend(critLanding);
-      !flyto(-2.0,3.0,0.70);
+      !flyto(-2.0,0.0,1.00);
       .wait(7500);
       !land;
       embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","safetyLanding").
@@ -157,19 +159,20 @@ my_number_string(S) :- my_number(N)
       .suspend(combatFire);
       .print("Fire is Extinguished, returning to Base");
       .suspend(hover);
-      !flyto(-2.0,3.0,0.70);
+      !flyto(-2.0,0.0,1.00);
       .wait(8000);
       !land;
       embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","Normal Landing").
 
-+!reactRed(N)
++!reactRed
    :  afterhover
-   <- .wait(200);
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agReact","reactRed");
+      & not reactred
+   <- +reactred;
       .suspend(analyzeFire);
-      +reactred;
-      .print("Took 200ms to reactRed");
-      !flyto(0.0,0.5,0.70);
+      .wait(1000);
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agReact","reactRed");
+      .print("Took 1s to reactRed");
+      !flyto(1.0,2.5,1.00);
       .wait(7500);
       -reactred;
       !land;
@@ -181,13 +184,13 @@ my_number_string(S) :- my_number(N)
    <- +reactblue;
       .suspend(analyzeFire);
       .print("reactBlue");
-      !flyto(-1.5,0.5,0.70);
+      !flyto(1.0,0.5,1.0);
       .wait(3000);
-      !flyto(-2.0,0.5,0.70);
+      !flyto(1.0,0.0,1.0);
       .wait(3000);
-      !flyto(-2.5,0.5,0.70);
+      !flyto(1.0,-0.5,1.0);
       .wait(3000);
-      !flyto(-2.0,0.5,0.70);
+      !flyto(1.0,0.0,1.0);
       .wait(3000);
       -reactblue;
       !analyzeFire.

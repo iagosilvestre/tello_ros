@@ -11,6 +11,7 @@ from launch.actions import ExecuteProcess
 def generate_launch_description():
     ns = 'drone1'
     world_path = os.path.join(get_package_share_directory('tello_gazebo'), 'worlds', 'it406.world')
+    #world_path = os.path.join(get_package_share_directory('tello_ros'), 'worlds', 'it406.world')
     urdf_path = os.path.join(get_package_share_directory('tello_description'), 'urdf', 'tello_1.urdf')
 
     return LaunchDescription([
@@ -25,7 +26,8 @@ def generate_launch_description():
 
         # Spawn tello.urdf
         Node(package='tello_gazebo', executable='inject_entity.py', output='screen',
-             arguments=[urdf_path, '-2', '3', '0.5', '-1.57'])
+             #arguments=[urdf_path, '-2', '3', '0.5', '-1.57'])
+             arguments=[urdf_path, '-2', '0', '0.5', '0.0'])
              ,
 
         # Publish static transforms

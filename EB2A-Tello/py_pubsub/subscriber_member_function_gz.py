@@ -98,7 +98,7 @@ class MinimalSubscriber(Node):
 
         self.pub_cmd_vel = self.create_publisher(Twist, '/drone1/cmd_vel', 1)
         self.pub_cmd_vel_dummy = self.create_publisher(Twist, '/cmd_vel', 1)
-        self.pub_cmd_velX_dummy = self.create_publisher(Int16, '/cmd_velX', 1)
+        self.pub_cmd_velY_dummy = self.create_publisher(Int16, '/cmd_velY', 1)
 
         # Publisher to control the model's pose
         self.publisher = self.create_publisher(
@@ -229,13 +229,19 @@ class MinimalSubscriber(Node):
         #request.initial_pose.position.y = float(argv[3])
         #request.initial_pose.position.z = float(argv[4])
 
-        request.initial_pose.position.x = -2.0
+        #request.initial_pose.position.x = -2.0
+        request.initial_pose.position.x = 1.7
         request.initial_pose.position.y = 0.0
         request.initial_pose.position.z = 1.3
-        request.initial_pose.orientation.x = 0.5262733023599449
-        request.initial_pose.orientation.y = 0.5339706903029998
-        request.initial_pose.orientation.z = -0.4805629580935845
-        request.initial_pose.orientation.w = 0.454940607583935
+        request.initial_pose.orientation.x = 0.001250731431127177
+        request.initial_pose.orientation.y = 0.6816700348249676
+        request.initial_pose.orientation.z = 0.001250731431127177
+        request.initial_pose.orientation.w = 0.7316575940721876
+
+        #request.initial_pose.orientation.x = 0.5262733023599449
+        #request.initial_pose.orientation.y = 0.5339706903029998
+        #request.initial_pose.orientation.z = -0.4805629580935845
+        #request.initial_pose.orientation.w = 0.454940607583935
 
         future = self.spawn_entity_client.call_async(request)
         #rclpy.spin_until_future_complete(self, future)
@@ -293,6 +299,12 @@ class MinimalSubscriber(Node):
                 self.delete_object('red_target')
             self.spawn_object('white_target')
             self.spawn=1
+            #print("spawned blue")
+        elif msg.data=="del":
+            if self.spawn==1:
+                #print("spawn = 1")
+                self.delete_object('blue_target')
+                self.delete_object('red_target')
             #print("spawned blue")
 
 
@@ -397,13 +409,13 @@ class MinimalSubscriber(Node):
             msg_y=Float32()
             msg_w=Float32()
             batt=Int16()
-            velX=Int16()
+            velY=Int16()
             while True:
                 if(self.startgoto==1):
                     msg.linear.x = 0.0
                     msg.linear.y = 0.0
                     msg.angular.z = 0.0
-                    velX.data=0
+                    velY.data=0
                     fast=0.05
                     slow=0.01
                     speed=0.0
@@ -414,24 +426,31 @@ class MinimalSubscriber(Node):
                     if(abs(self.goal_x-self.current_x)>self.thrs):
                         #print("front/back")
                         if(self.goal_x>self.current_x):
-                            msg.linear.y = speed
+                            msg.linear.x = speed
                         else:
-                            msg.linear.y = -speed
+                            msg.linear.x = -speed
                     if(abs(self.goal_y-self.current_y)>self.thrs):
                         #print("left/right")
                         if(self.goal_y>self.current_y):
-                            msg.linear.x = -speed
-                            velX.data=int(-speed*100)
+                            msg.linear.y = speed
+                            velY.data=int(speed*100)
                         else:
-                            msg.linear.x = speed
-                            velX.data=int(speed*100)
+                            msg.linear.y = -speed
+                            velY.data=int(-speed*100)
                     if(abs(self.goal_w-self.current_w)>0.01):
                         #print("rotation")
                         if(self.goal_w>self.current_w):
                             msg.angular.z = 0.01
 
                         else:
-                            msg.angular.z = -0.01   
+                            msg.angular.z = -0.01  
+                    if(abs(self.goal_w-self.current_w)>0.1):
+                        #print("rotation")
+                        if(self.goal_w>self.current_w):
+                            msg.angular.z = 0.05
+
+                        else:
+                            msg.angular.z = -0.05  
                 #if(self.startgoto==1):                
                     self.pub_cmd_vel.publish(msg) #Only for ROS-Gazebo Simulation
                      #Only for ROS-Gazebo Simulation- dummmy for RosMonitoring check
@@ -444,7 +463,7 @@ class MinimalSubscriber(Node):
                 self.pub_agt_w.publish(msg_w)
 
                 self.pub_cmd_vel_dummy.publish(msg)
-                self.pub_cmd_velX_dummy.publish(velX)
+                self.pub_cmd_velY_dummy.publish(velY)
                 self.pub_batt.publish(batt)
                 #print("Goal_x = %.2f and Drone_x=  %.2f "  % (self.goal_x, self.current_x))
                 #print("Goal_y = %.2f and Drone_y=  %.2f "  % (self.goal_y, self.current_y))
@@ -499,7 +518,7 @@ class MinimalSubscriber(Node):
 
                 if(self.ignCam==1):
                     redData.data=0
-                elif(red_pixel_count>200):
+                else:
                     #redData.data=1
                     redData.data=int(red_pixel_count)
                 if(self.ignCam==1):
