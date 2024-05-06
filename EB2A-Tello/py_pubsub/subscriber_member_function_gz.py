@@ -439,14 +439,14 @@ class MinimalSubscriber(Node):
                         else:
                             msg.linear.y = -speed
                             velY.data=int(-speed*100)
-                    if(abs(self.goal_w-self.current_w)>0.01):
+                    if(abs(self.goal_w-self.current_w)>0.001):
                         #print("rotation")
                         if(self.goal_w>self.current_w):
-                            msg.angular.z = 0.01
+                            msg.angular.z = 0.03
 
                         else:
-                            msg.angular.z = -0.01  
-                    if(abs(self.goal_w-self.current_w)>0.1):
+                            msg.angular.z = -0.03  
+                    if(abs(self.goal_w-self.current_w)>0.5):
                         #print("rotation")
                         if(self.goal_w>self.current_w):
                             msg.angular.z = 0.05
@@ -466,7 +466,7 @@ class MinimalSubscriber(Node):
 
                 self.pub_cmd_vel_dummy.publish(msg)
                 self.pub_cmd_velY_dummy.publish(velY)
-                self.pub_batt.publish(batt)
+                #self.pub_batt.publish(batt)
                 #print("Goal_x = %.2f and Drone_x=  %.2f "  % (self.goal_x, self.current_x))
                 #print("Goal_y = %.2f and Drone_y=  %.2f "  % (self.goal_y, self.current_y))
                 #print("Goal_w = %.2f and Drone_w=  %.2f "  % (self.goal_w, self.current_w))

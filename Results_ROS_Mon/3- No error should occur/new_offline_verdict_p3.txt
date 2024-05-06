@@ -1,0 +1,77 @@
+{'data': 99, 'topic': 'battery', 'time': 0}
+{'data': 99, 'topic': 'battery', 'time': 1.0}
+{'data': 99, 'topic': 'battery', 'time': 2.0}
+{'data': 99, 'topic': 'battery', 'time': 3.0}
+{'data': 99, 'topic': 'battery', 'time': 4.0}
+{'data': 99, 'topic': 'battery', 'time': 5.0}
+{'data': 99, 'topic': 'battery', 'time': 6.0}
+{'data': 99, 'topic': 'battery', 'time': 7.0}
+{'data': 99, 'topic': 'battery', 'time': 8.0}
+{'data': 99, 'topic': 'battery', 'time': 9.0}
+{'data': 99, 'topic': 'battery', 'time': 10.0}
+{'data': 99, 'topic': 'battery', 'time': 11.0}
+{'data': 90, 'topic': 'battery', 'time': 16.0}
+{'data': 90, 'topic': 'battery', 'time': 17.0}
+{'data': 90, 'topic': 'battery', 'time': 18.0}
+{'data': 90, 'topic': 'battery', 'time': 19.0}
+{'data': 90, 'topic': 'battery', 'time': 20.0}
+{'data': 90, 'topic': 'battery', 'time': 21.0}
+{'data': 70, 'topic': 'battery', 'time': 26.0}
+{'data': 70, 'topic': 'battery', 'time': 27.0}
+{'data': 70, 'topic': 'battery', 'time': 28.0}
+{'data': 70, 'topic': 'battery', 'time': 29.0}
+{'data': 70, 'topic': 'battery', 'time': 30.0}
+{'data': 70, 'topic': 'battery', 'time': 31.0}
+{'data': 70, 'topic': 'battery', 'time': 32.0}
+{'data': 41, 'topic': 'battery', 'time': 38.0}
+{'data': 41, 'topic': 'battery', 'time': 39.0}
+{'data': 41, 'topic': 'battery', 'time': 40.0}
+{'data': 41, 'topic': 'battery', 'time': 41.0}
+{'data': 41, 'topic': 'battery', 'time': 42.0}
+{'data': 41, 'topic': 'battery', 'time': 43.0}
+{'data': 41, 'topic': 'battery', 'time': 44.0}
+{'data': 41, 'topic': 'battery', 'time': 45.0}
+{'data': 41, 'topic': 'battery', 'time': 46.0}
+{'data': 15, 'topic': 'battery', 'time': 53.0}
+{'data': '"criticalLanding"', 'topic': 'agLand', 'time': 53.0}
+{'data': 15, 'topic': 'battery', 'time': 54.0}
+{'data': 15, 'topic': 'battery', 'time': 55.0}
+{'data': 15, 'topic': 'battery', 'time': 56.0}
+{'data': 15, 'topic': 'battery', 'time': 57.0}
+{'data': 15, 'topic': 'battery', 'time': 58.0}
+{'data': 15, 'topic': 'battery', 'time': 59.0}
+Property violated: ({topic: 'agLand', data_mod: 'criticalLanding'} -> once[1:5]{topic: 'battery', battery: 'Critical'}) and (not {topic: 'agLand', data_mod: 'criticalLanding'} -> (once[1:5]{topic: 'agLand', data_mod: 'criticalLanding'}  or not (once[2:5] {topic: 'battery', battery: 'Critical'})))
+The event: 
+{"data": 15, "topic": "battery", "time": 1713274155.0}
+
+is not consistent with the specification.
+{'data': 15, 'topic': 'battery', 'time': 60.0}
+Property violated: ({topic: 'agLand', data_mod: 'criticalLanding'} -> once[1:5]{topic: 'battery', battery: 'Critical'}) and (not {topic: 'agLand', data_mod: 'criticalLanding'} -> (once[1:5]{topic: 'agLand', data_mod: 'criticalLanding'}  or not (once[2:5] {topic: 'battery', battery: 'Critical'})))
+The event: 
+{"data": 15, "topic": "battery", "time": 1713274156.0}
+
+is not consistent with the specification.
+{'data': 15, 'topic': 'battery', 'time': 61.0}
+Property violated: ({topic: 'agLand', data_mod: 'criticalLanding'} -> once[1:5]{topic: 'battery', battery: 'Critical'}) and (not {topic: 'agLand', data_mod: 'criticalLanding'} -> (once[1:5]{topic: 'agLand', data_mod: 'criticalLanding'}  or not (once[2:5] {topic: 'battery', battery: 'Critical'})))
+The event: 
+{"data": 15, "topic": "battery", "time": 1713274157.0}
+
+is not consistent with the specification.
+{'data': 15, 'topic': 'battery', 'time': 62.0}
+Property violated: ({topic: 'agLand', data_mod: 'criticalLanding'} -> once[1:5]{topic: 'battery', battery: 'Critical'}) and (not {topic: 'agLand', data_mod: 'criticalLanding'} -> (once[1:5]{topic: 'agLand', data_mod: 'criticalLanding'}  or not (once[2:5] {topic: 'battery', battery: 'Critical'})))
+The event: 
+{"data": 15, "topic": "battery", "time": 1713274158.0}
+
+is not consistent with the specification.
+{'data': 15, 'topic': 'battery', 'time': 63.0}
+Property violated: ({topic: 'agLand', data_mod: 'criticalLanding'} -> once[1:5]{topic: 'battery', battery: 'Critical'}) and (not {topic: 'agLand', data_mod: 'criticalLanding'} -> (once[1:5]{topic: 'agLand', data_mod: 'criticalLanding'}  or not (once[2:5] {topic: 'battery', battery: 'Critical'})))
+The event: 
+{"data": 15, "topic": "battery", "time": 1713274159.0}
+
+is not consistent with the specification.
+{'data': 15, 'topic': 'battery', 'time': 64.0}
+Property violated: ({topic: 'agLand', data_mod: 'criticalLanding'} -> once[1:5]{topic: 'battery', battery: 'Critical'}) and (not {topic: 'agLand', data_mod: 'criticalLanding'} -> (once[1:5]{topic: 'agLand', data_mod: 'criticalLanding'}  or not (once[2:5] {topic: 'battery', battery: 'Critical'})))
+The event: 
+{"data": 15, "topic": "battery", "time": 1713274160.0}
+
+is not consistent with the specification.

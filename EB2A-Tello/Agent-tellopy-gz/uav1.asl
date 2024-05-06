@@ -77,8 +77,8 @@ my_number_string(S) :- my_number(N)
 //critical battery detection
 +batt(B) : crit_batt(CB) & B<CB <- !critLanding.
 
-+eland(N) : my_number(N) <- !critLanding.
-//+eland(N) : my_number(N) <- !safetyLanding.
+//+eland(N) : my_number(N) <- !critLanding.
++eland(N) : my_number(N) <- !safetyLanding.
 //+eland(N) : my_number(N) <- !reactRed.
 
 +fireExt(N) : my_number(N) <- !returnToBase.
@@ -109,7 +109,7 @@ my_number_string(S) :- my_number(N)
       !takeoff;
       .wait(5000);
       !flyto(1.0,0.0,1.0);
-      .wait(10000);
+      .wait(12000);
       //+hovering;
       //!left;
       //.wait(10000);
@@ -131,10 +131,11 @@ my_number_string(S) :- my_number(N)
    <- .print("Safety Landing Procedure");
       .suspend(hover);
       .suspend(critLanding);
+      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","safetyLanding");
       !flyto(-2.0,0.0,1.00);
       .wait(7500);
-      !land;
-      embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","safetyLanding").
+      !land.
+      //embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agentLanding","safetyLanding").
 
 +!critLanding
    <- .print("Critical Landing Procedure");
@@ -168,11 +169,12 @@ my_number_string(S) :- my_number(N)
    :  afterhover
       & not reactred
    <- +reactred;
-      .suspend(analyzeFire);
       embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","cmd","ign;0");
       .wait(5000);
+      .print("Took 5s to reactRed");
       embedded.mas.bridges.jacamo.defaultEmbeddedInternalAction("roscore1","agReact","reactRed");
-      .print("Took 1s to reactRed");
+      
+      .suspend(analyzeFire);
       !flyto(1.0,2.5,1.00);
       .wait(7500);
       -reactred;
