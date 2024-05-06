@@ -64,6 +64,11 @@
 {'data': 99, 'topic': 'battery', 'time': 63.0}
 {'data': 99, 'topic': 'battery', 'time': 64.0}
 {'data': '"safetyLanding"', 'topic': 'agLand', 'time': 65.0}
+Property violated: ({topic: 'agLand', data_mod: 'safetyLanding'} -> once[2:5]{topic: 'battery', battery: 'Safety'}) and (not {topic: 'agLand', data_mod: 'safetyLanding'} -> (once[2:5]{topic: 'agLand', data_mod: 'safetyLanding'} or not (once[3:5] {topic: 'battery', battery: 'Safety'})))
+The event: 
+{"data": "\"safetyLanding\"", "topic": "agLand", "time": 1713273986.0}
+
+is not consistent with the specification.
 {'data': 99, 'topic': 'battery', 'time': 65.0}
 {'data': 99, 'topic': 'battery', 'time': 66.0}
 {'data': 99, 'topic': 'battery', 'time': 67.0}
