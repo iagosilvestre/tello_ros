@@ -1,7 +1,7 @@
 import oracle
 
 # property to verify
-PROPERTY =  "(once[20:21]{topic: 'battery', battery: 'Safety'} -> {topic: 'agLand', data: 'safetyLanding'})"
+PROPERTY = "(forall[t]. {topic: 'cmd_vel', time: *t} -> {topic: 'cmd_vel', forwardMotion: 'True', time: *t})"
 
 # predicates used in the property (initialization for time 0)
 predicates = dict()
@@ -16,17 +16,9 @@ def abstract_message(message):
     predicates['topic'] = message['topic']
     predicates['time'] = str(message['time'])
     
-    if message['topic'] in ["agLand", "battery"]:
-        predicates['data'] = str(message['data'])
-    
-    if message['topic'] == "battery":
-    	percentage = int(message['data'])
-    	if percentage >= 20 and percentage <= 40: 
-    		predicates['battery'] = 'Safety'
-    	elif percentage < 20:
-    		predicates['battery'] = 'Critical'
-    	else:
-    		predicates['battery'] = 'Unspecified'
-    		
-   
+    if message['topic'] == 'cmd_vel':
+    	linearY = float(message.linear.y)
+    	predicates['forwardMotion'] = str((linearY >= 0))
+    	
+    #print(predicates)
     return predicates

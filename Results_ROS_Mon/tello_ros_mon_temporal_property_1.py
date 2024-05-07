@@ -1,7 +1,7 @@
 import oracle
 
 # property to verify
-PROPERTY = '''({topic: 'agentReact', data_mod: 'reactRed'} -> once[2:5]{topic: 'detectRed', detectRed: 'True'}) and (not {topic: 'agentReact', data_mod: 'reactRed'} -> not (once[2:5]{topic: 'detectRed', detectRed: 'True'}))'''
+PROPERTY = '''({topic: 'agentReact', data_mod: 'reactRed'} -> once[1:3]{topic: 'detectRed', detectRed: 'True'}) and (not {topic: 'agentReact', data_mod: 'reactRed'} -> (once[1:3]{topic: 'agentReact', data_mod: 'reactRed'} or not (once[2:3]{topic: 'detectRed', detectRed: 'True'})))'''
 
 # predicates used in the property (initialization for time 0)
 predicates = dict()

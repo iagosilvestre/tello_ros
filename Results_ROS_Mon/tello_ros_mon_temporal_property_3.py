@@ -1,7 +1,7 @@
 import oracle
 
 # property to verify
-PROPERTY = "({topic: 'agLand', data_mod: 'criticalLanding'} -> once[2:5]{topic: 'battery', battery: 'Critical'}) and (not {topic: 'agLand', data_mod: 'criticalLanding'} -> not (once[3:5] {topic: 'battery', battery: 'Critical'}))"
+PROPERTY = "({topic: 'agLand', data_mod: 'criticalLanding'} -> once[1:5]{topic: 'battery', battery: 'Critical'}) and (not {topic: 'agLand', data_mod: 'criticalLanding'} -> (once[1:5]{topic: 'agLand', data_mod: 'criticalLanding'}  or not (once[2:5] {topic: 'battery', battery: 'Critical'})))"
 
 # predicates used in the property (initialization for time 0)
 predicates = dict()
